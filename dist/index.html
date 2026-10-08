@@ -22,7 +22,7 @@
           index = Math.floor(Math.random() * styles.length);
         }
         style = styles[index];
-        document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax';
+        document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax; Secure';
       }
       document.documentElement.dataset.style = style;
       window.__sandStyle = style;
