@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="文章、音声、ゲームを横断する個人活動のリンク集。">
+  <meta name="theme-color" content="#f2efdf">
+  <title>YOUR NAME — links & works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23202a22'/%3E%3Cpath d='M18 20h28v6H18zm0 12h20v6H18zm0 12h12v6H18z' fill='%23f2efdf'/%3E%3Ccircle cx='46' cy='44' r='6' fill='%23ff4f34'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #f2efdf;
+      --ink: #202a22;
+      --muted: #687067;
+      --red: #ff4f34;
+      --yellow: #f5c945;
+      --blue: #9bd5e6;
+      --rule: rgba(32, 42, 34, .22);
+      --shadow: 8px 8px 0 var(--ink);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(245,201,69,.22), transparent 24rem),
+        linear-gradient(rgba(32,42,34,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(32,42,34,.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, 24px 24px, 24px 24px, auto;
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .signature {
+      font-family: "DM Mono", monospace;
+      font-weight: 500;
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+    .status {
+      display: inline-flex;
+      gap: .6rem;
+      align-items: center;
+      font: 13px/1.2 "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .status::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 4px rgba(255,79,52,.16);
+      animation: blink 2.2s ease-in-out infinite;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap: 40px;
+      align-items: end;
+      padding: 76px 0 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .eyebrow {
+      margin: 0 0 22px;
+      font: 13px/1.2 "DM Mono", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 860px;
+      margin: 0;
+      font-size: clamp(3.4rem, 8.3vw, 8.7rem);
+      line-height: .88;
+      letter-spacing: -.085em;
+      font-weight: 900;
+    }
+    h1 .outline {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+      text-stroke: 2px var(--ink);
+    }
+    .hero-note {
+      justify-self: end;
+      max-width: 265px;
+      padding: 22px;
+      background: var(--yellow);
+      border: 2px solid var(--ink);
+      transform: rotate(2.2deg);
+      box-shadow: var(--shadow);
+      font-weight: 700;
+    }
+    .hero-note p { margin: 0; }
+    .hero-note small {
+      display: block;
+      margin-top: 18px;
+      font: 12px/1.4 "DM Mono", monospace;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 44px 0 20px;
+    }
+    h2 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: -.055em; }
+    .section-head span { font: 13px/1.2 "DM Mono", monospace; }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      padding-bottom: 74px;
+    }
+    .card {
+      --card-bg: #fff;
+      position: relative;
+      min-height: 238px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 24px;
+      color: var(--ink);
+      background: var(--card-bg);
+      border: 2px solid var(--ink);
+      text-decoration: none;
+      transition: transform .22s ease, box-shadow .22s ease;
+      cursor: pointer;
+    }
+    .card:hover, .card:focus-visible {
+      z-index: 2;
+      outline: 0;
+      transform: translate(-5px, -5px);
+      box-shadow: 9px 9px 0 var(--ink);
+    }
+    .card:focus-visible { box-shadow: 9px 9px 0 var(--red); }
+    .card:nth-child(1) { grid-column: span 7; --card-bg: var(--blue); }
+    .card:nth-child(2) { grid-column: span 5; --card-bg: var(--ink); color: var(--paper); }
+    .card:nth-child(3) { grid-column: span 4; }
+    .card:nth-child(4) { grid-column: span 4; --card-bg: var(--yellow); }
+    .card:nth-child(5) { grid-column: span 4; --card-bg: var(--red); }
+    .card-top { display: flex; justify-content: space-between; gap: 24px; }
+    .index { font: 13px/1.2 "DM Mono", monospace; }
+    .glyph {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      font: 18px/1 "DM Mono", monospace;
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), background .2s;
+    }
+    .card:hover .glyph { transform: rotate(14deg) scale(1.08); background: rgba(255,255,255,.22); }
+    .card h3 { margin: 22px 0 8px; font-size: clamp(1.65rem, 3vw, 2.7rem); line-height: 1; letter-spacing: -.06em; }
+    .card p { max-width: 36ch; margin: 0; color: currentColor; opacity: .74; font-size: .94rem; }
+    .meta { margin-top: 24px; font: 12px/1.2 "DM Mono", monospace; letter-spacing: .05em; text-transform: uppercase; }
+
+    .ticker {
+      overflow: hidden;
+      border-block: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      padding: 10px 0;
+      animation: ticker 26s linear infinite;
+    }
+    .ticker-track span { padding-right: 34px; font: 13px/1 "DM Mono", monospace; text-transform: uppercase; }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: end;
+      min-height: 220px;
+      padding: 48px 0;
+    }
+    footer p { margin: 0; max-width: 34ch; }
+    footer .mark { font-size: clamp(4rem, 9vw, 8rem); line-height: .72; font-weight: 900; letter-spacing: -.1em; }
+    .edit-note { margin-top: 14px; color: var(--muted); font-size: .86rem; }
+
+    dialog {
+      width: min(520px, calc(100% - 32px));
+      padding: 0;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      box-shadow: 12px 12px 0 var(--ink);
+    }
+    dialog::backdrop { background: rgba(32,42,34,.64); backdrop-filter: blur(4px); }
+    .dialog-inner { padding: 30px; }
+    .dialog-inner h2 { font-size: 2rem; }
+    .dialog-inner p { margin: 14px 0 24px; }
+    .close {
+      width: 100%;
+      padding: 13px 18px;
+      color: var(--paper);
+      background: var(--ink);
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .close:hover { background: var(--red); }
+
+    @keyframes ticker { to { transform: translateX(-50%); } }
+    @keyframes blink { 50% { opacity: .35; transform: scale(.7); } }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 24px, 680px); }
+      header { min-height: 66px; }
+      .status { font-size: 11px; }
+      .hero { grid-template-columns: 1fr; gap: 34px; padding: 52px 0 46px; }
+      h1 { font-size: clamp(3.25rem, 17vw, 6.6rem); }
+      .hero-note { justify-self: start; max-width: 82%; margin-left: 8px; }
+      .section-head { padding-top: 34px; }
+      .links { gap: 12px; padding-bottom: 50px; }
+      .card, .card:nth-child(n) { grid-column: span 12; min-height: 205px; }
+      .card:nth-child(3), .card:nth-child(4) { grid-column: span 6; min-height: 240px; }
+      .card:nth-child(3) p, .card:nth-child(4) p { font-size: .84rem; }
+      footer { grid-template-columns: 1fr; }
+      footer .mark { justify-self: end; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="signature" href="#top">YOUR NAME / INDEX</a>
+    <span class="status">making things</span>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Writer · Talker · Game maker</p>
+        <h1 id="page-title">言葉と音と<span class="outline">遊べるもの。</span></h1>
+      </div>
+      <aside class="hero-note">
+        <p>考えたことを書き、話し、たまにゲームにしています。</p>
+        <small>Tokyo / On the internet</small>
+      </aside>
+    </section>
+
+    <section class="wrap" aria-labelledby="links-heading">
+      <div class="section-head">
+        <h2 id="links-heading">Links & works</h2>
+        <span>01—05 / SELECT</span>
+      </div>
+
+      <div class="links">
+        <a class="card placeholder-link" href="#" data-service="Bluesky">
+          <div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div>
+          <div><h3>Bluesky</h3><p>制作メモ、日々の断片、更新のお知らせ。</p><div class="meta">Short notes / Updates</div></div>
+        </a>
+
+        <a class="card placeholder-link" href="#" data-service="Spotify Podcast">
+          <div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div>
+          <div><h3>Podcast</h3><p>考えていることを、声と言葉でゆっくりほぐす番組。</p><div class="meta">On Spotify / Episodes</div></div>
+        </a>
+
+        <a class="card placeholder-link" href="#" data-service="note">
+          <div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div>
+          <div><h3>note</h3><p>エッセイと制作の記録。</p><div class="meta">Essays / Logs</div></div>
+        </a>
+
+        <a class="card placeholder-link" href="#" data-service="Offprint">
+          <div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div>
+          <div><h3>Offprint</h3><p>まとまった文章と出版物。</p><div class="meta">Books / Zines</div></div>
+        </a>
+
+        <a class="card placeholder-link" href="#" data-service="制作したゲーム">
+          <div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div>
+          <div><h3>Games</h3><p>つくったゲームを遊ぶ。小さな実験もここに。</p><div class="meta">Playable / Archive</div></div>
+        </a>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <div>
+      <p>このページは、インターネット上の活動をひとつの入口にまとめた索引です。</p>
+      <p class="edit-note">© 2026 YOUR NAME</p>
+    </div>
+    <div class="mark" aria-hidden="true">※</div>
+  </footer>
+
+  <dialog id="link-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <h2 id="dialog-title">リンクは準備中です</h2>
+      <p><strong id="service-name"></strong> のURLを設定すると、ここから直接開けるようになります。</p>
+      <button class="close" type="button">閉じる</button>
+    </div>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector('#link-dialog');
+    const serviceName = document.querySelector('#service-name');
+    document.querySelectorAll('.placeholder-link').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        serviceName.textContent = link.dataset.service;
+        dialog.showModal();
+      });
+    });
+    dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  </script>
+</body>
+</html>
