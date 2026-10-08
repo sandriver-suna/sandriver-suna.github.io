@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="文章、音声、ゲームを横断する個人活動のリンク集。">
+  <meta name="description" content="砂の文章、ポッドキャスト、ゲームをまとめたリンク集。">
   <meta name="theme-color" content="#f2efdf">
-  <title>YOUR NAME — links & works</title>
+  <title>砂 — links & works</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -207,29 +207,6 @@
     footer .mark { font-size: clamp(4rem, 9vw, 8rem); line-height: .72; font-weight: 900; letter-spacing: -.1em; }
     .edit-note { margin-top: 14px; color: var(--muted); font-size: .86rem; }
 
-    dialog {
-      width: min(520px, calc(100% - 32px));
-      padding: 0;
-      color: var(--ink);
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      box-shadow: 12px 12px 0 var(--ink);
-    }
-    dialog::backdrop { background: rgba(32,42,34,.64); backdrop-filter: blur(4px); }
-    .dialog-inner { padding: 30px; }
-    .dialog-inner h2 { font-size: 2rem; }
-    .dialog-inner p { margin: 14px 0 24px; }
-    .close {
-      width: 100%;
-      padding: 13px 18px;
-      color: var(--paper);
-      background: var(--ink);
-      border: 0;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .close:hover { background: var(--red); }
-
     @keyframes ticker { to { transform: translateX(-50%); } }
     @keyframes blink { 50% { opacity: .35; transform: scale(.7); } }
 
@@ -256,19 +233,19 @@
 </head>
 <body>
   <header class="wrap">
-    <a class="signature" href="#top">YOUR NAME / INDEX</a>
+    <a class="signature" href="#top">砂 / INDEX</a>
     <span class="status">making things</span>
   </header>
 
   <main id="top">
     <section class="hero wrap" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Writer · Talker · Game maker</p>
+        <p class="eyebrow">Writer · Podcaster · Game maker</p>
         <h1 id="page-title">言葉と音と<span class="outline">遊べるもの。</span></h1>
       </div>
       <aside class="hero-note">
-        <p>考えたことを書き、話し、たまにゲームにしています。</p>
-        <small>Tokyo / On the internet</small>
+        <p>無機物代表として頑張ります。</p>
+        <small>sandriver / on the internet</small>
       </aside>
     </section>
 
@@ -279,29 +256,29 @@
       </div>
 
       <div class="links">
-        <a class="card placeholder-link" href="#" data-service="Bluesky">
+        <a class="card" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">
           <div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div>
-          <div><h3>Bluesky</h3><p>制作メモ、日々の断片、更新のお知らせ。</p><div class="meta">Short notes / Updates</div></div>
+          <div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p><div class="meta">@sandriver.bsky.social</div></div>
         </a>
 
-        <a class="card placeholder-link" href="#" data-service="Spotify Podcast">
+        <a class="card" href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">
           <div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div>
-          <div><h3>Podcast</h3><p>考えていることを、声と言葉でゆっくりほぐす番組。</p><div class="meta">On Spotify / Episodes</div></div>
+          <div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p><div class="meta">Listen on Spotify</div></div>
         </a>
 
-        <a class="card placeholder-link" href="#" data-service="note">
+        <a class="card" href="https://note.com/sandriver" target="_blank" rel="noreferrer">
           <div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div>
-          <div><h3>note</h3><p>エッセイと制作の記録。</p><div class="meta">Essays / Logs</div></div>
+          <div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p><div class="meta">Articles / Archive</div></div>
         </a>
 
-        <a class="card placeholder-link" href="#" data-service="Offprint">
+        <a class="card" href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">
           <div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div>
-          <div><h3>Offprint</h3><p>まとまった文章と出版物。</p><div class="meta">Books / Zines</div></div>
+          <div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p><div class="meta">Long reads / Subscribe</div></div>
         </a>
 
-        <a class="card placeholder-link" href="#" data-service="制作したゲーム">
+        <a class="card" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">
           <div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div>
-          <div><h3>Games</h3><p>つくったゲームを遊ぶ。小さな実験もここに。</p><div class="meta">Playable / Archive</div></div>
+          <div><h3>1999</h3><p>永遠に続く、1999年7月の夏休み。二人の女の子の物語。</p><div class="meta">Browser game / 15 min</div></div>
         </a>
       </div>
     </section>
@@ -316,33 +293,10 @@
   <footer class="wrap">
     <div>
       <p>このページは、インターネット上の活動をひとつの入口にまとめた索引です。</p>
-      <p class="edit-note">© 2026 YOUR NAME</p>
+      <p class="edit-note">© 2026 砂</p>
     </div>
     <div class="mark" aria-hidden="true">※</div>
   </footer>
 
-  <dialog id="link-dialog" aria-labelledby="dialog-title">
-    <div class="dialog-inner">
-      <h2 id="dialog-title">リンクは準備中です</h2>
-      <p><strong id="service-name"></strong> のURLを設定すると、ここから直接開けるようになります。</p>
-      <button class="close" type="button">閉じる</button>
-    </div>
-  </dialog>
-
-  <script>
-    const dialog = document.querySelector('#link-dialog');
-    const serviceName = document.querySelector('#service-name');
-    document.querySelectorAll('.placeholder-link').forEach((link) => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        serviceName.textContent = link.dataset.service;
-        dialog.showModal();
-      });
-    });
-    dialog.querySelector('.close').addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) dialog.close();
-    });
-  </script>
 </body>
 </html>
