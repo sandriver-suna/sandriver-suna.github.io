@@ -1,302 +1,236 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-style="zine">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="砂の文章、ポッドキャスト、ゲームをまとめたリンク集。">
   <meta name="theme-color" content="#f2efdf">
   <title>砂の砂場</title>
+  <script>
+    (() => {
+      const styles = ['zine', 'midnight', 'shizuka', 'candy', 'terminal'];
+      let index;
+      try {
+        const value = new Uint32Array(1);
+        crypto.getRandomValues(value);
+        index = value[0] % styles.length;
+      } catch (_) {
+        index = Math.floor(Math.random() * styles.length);
+      }
+      document.documentElement.dataset.style = styles[index];
+      window.__sandStyle = styles[index];
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DotGothic16&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23202a22'/%3E%3Cpath d='M18 20h28v6H18zm0 12h20v6H18zm0 12h12v6H18z' fill='%23f2efdf'/%3E%3Ccircle cx='46' cy='44' r='6' fill='%23ff4f34'/%3E%3C/svg%3E">
   <style>
     :root {
-      --paper: #f2efdf;
-      --ink: #202a22;
-      --muted: #687067;
-      --red: #ff4f34;
-      --yellow: #f5c945;
-      --blue: #9bd5e6;
-      --rule: rgba(32, 42, 34, .22);
-      --shadow: 8px 8px 0 var(--ink);
+      --bg: #f2efdf; --fg: #202a22; --muted: #687067; --accent: #ff4f34;
+      --accent-2: #f5c945; --accent-3: #9bd5e6; --card: #fff; --rule: rgba(32,42,34,.22);
+      --sans: "Noto Sans JP", system-ui, sans-serif; --display: "Noto Sans JP", system-ui, sans-serif;
+      --mono: "DM Mono", monospace; --wrap: min(1180px, calc(100% - 40px));
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-width: 320px;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 15% 10%, rgba(245,201,69,.22), transparent 24rem),
-        linear-gradient(rgba(32,42,34,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(32,42,34,.035) 1px, transparent 1px),
-        var(--paper);
-      background-size: auto, 24px 24px, 24px 24px, auto;
-      font-family: "Noto Sans JP", system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
+    body { margin: 0; min-width: 320px; color: var(--fg); background: var(--bg); font-family: var(--sans); font-size: 16px; line-height: 1.7; transition: color .2s, background .2s; }
     a { color: inherit; }
-    button { font: inherit; }
-    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 82px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .signature {
-      font-family: "DM Mono", monospace;
-      font-weight: 500;
-      letter-spacing: -.04em;
-      text-decoration: none;
-    }
-    .status {
-      display: inline-flex;
-      gap: .6rem;
-      align-items: center;
-      font: 13px/1.2 "DM Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-    .status::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--red);
-      box-shadow: 0 0 0 4px rgba(255,79,52,.16);
-      animation: blink 2.2s ease-in-out infinite;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.4fr .6fr;
-      gap: 40px;
-      align-items: end;
-      padding: 76px 0 60px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .eyebrow {
-      margin: 0 0 22px;
-      font: 13px/1.2 "DM Mono", monospace;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    h1 {
-      max-width: 860px;
-      margin: 0;
-      font-size: clamp(3.4rem, 8.3vw, 8.7rem);
-      line-height: .88;
-      letter-spacing: -.085em;
-      font-weight: 900;
-    }
-    h1 .outline {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 2px var(--ink);
-      text-stroke: 2px var(--ink);
-    }
-    .hero-note {
-      justify-self: end;
-      max-width: 265px;
-      padding: 22px;
-      background: var(--yellow);
-      border: 2px solid var(--ink);
-      transform: rotate(2.2deg);
-      box-shadow: var(--shadow);
-      font-weight: 700;
-    }
+    .wrap { width: var(--wrap); margin-inline: auto; }
+    .site-header { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--rule); }
+    .signature { font-family: var(--mono); font-weight: 500; letter-spacing: -.04em; text-decoration: none; }
+    .edition { font: 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .hero { display: grid; grid-template-columns: 1.4fr .6fr; gap: 40px; align-items: end; padding: 74px 0 58px; border-bottom: 1px solid var(--rule); }
+    .eyebrow { margin: 0 0 22px; font: 13px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-family: var(--display); font-size: clamp(4rem,10vw,9.6rem); font-weight: 900; line-height: .86; letter-spacing: -.095em; }
+    h1 span { display: block; }
+    .hero-note { justify-self: end; max-width: 265px; padding: 22px; font-weight: 700; }
     .hero-note p { margin: 0; }
-    .hero-note small {
-      display: block;
-      margin-top: 18px;
-      font: 12px/1.4 "DM Mono", monospace;
-      text-transform: uppercase;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 44px 0 20px;
-    }
-    h2 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: -.055em; }
-    .section-head span { font: 13px/1.2 "DM Mono", monospace; }
-
-    .links {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-      padding-bottom: 74px;
-    }
-    .card {
-      --card-bg: #fff;
-      position: relative;
-      min-height: 238px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-      padding: 24px;
-      color: var(--ink);
-      background: var(--card-bg);
-      border: 2px solid var(--ink);
-      text-decoration: none;
-      transition: transform .22s ease, box-shadow .22s ease;
-      cursor: pointer;
-    }
-    .card:hover, .card:focus-visible {
-      z-index: 2;
-      outline: 0;
-      transform: translate(-5px, -5px);
-      box-shadow: 9px 9px 0 var(--ink);
-    }
-    .card:focus-visible { box-shadow: 9px 9px 0 var(--red); }
-    .card:nth-child(1) { grid-column: span 7; --card-bg: var(--blue); }
-    .card:nth-child(2) { grid-column: span 5; --card-bg: var(--ink); color: var(--paper); }
-    .card:nth-child(3) { grid-column: span 4; }
-    .card:nth-child(4) { grid-column: span 4; --card-bg: var(--yellow); }
-    .card:nth-child(5) { grid-column: span 4; --card-bg: var(--red); }
+    .hero-note small { display: block; margin-top: 18px; font: 12px/1.4 var(--mono); text-transform: uppercase; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 44px 0 20px; }
+    h2 { margin: 0; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: -.055em; }
+    .section-head span { font: 13px/1.2 var(--mono); }
+    .links { display: grid; grid-template-columns: repeat(12,1fr); gap: 18px; padding-bottom: 74px; }
+    .card { position: relative; grid-column: span 4; min-height: 238px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 24px; color: var(--fg); background: var(--card); text-decoration: none; transition: transform .22s ease, box-shadow .22s ease, color .2s, background .2s; }
     .card-top { display: flex; justify-content: space-between; gap: 24px; }
-    .index { font: 13px/1.2 "DM Mono", monospace; }
-    .glyph {
-      display: grid;
-      place-items: center;
-      width: 46px;
-      height: 46px;
-      border: 1.5px solid currentColor;
-      border-radius: 50%;
-      font: 18px/1 "DM Mono", monospace;
-      transition: transform .3s cubic-bezier(.2,.8,.2,1), background .2s;
-    }
-    .card:hover .glyph { transform: rotate(14deg) scale(1.08); background: rgba(255,255,255,.22); }
-    .card h3 { margin: 22px 0 8px; font-size: clamp(1.65rem, 3vw, 2.7rem); line-height: 1; letter-spacing: -.06em; }
-    .card p { max-width: 36ch; margin: 0; color: currentColor; opacity: .74; font-size: .94rem; }
-    .meta { margin-top: 24px; font: 12px/1.2 "DM Mono", monospace; letter-spacing: .05em; text-transform: uppercase; }
+    .index { font: 13px/1.2 var(--mono); }
+    .glyph { width: 46px; height: 46px; display: grid; place-items: center; border: 1.5px solid currentColor; border-radius: 50%; font: 18px/1 var(--mono); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+    .card:hover .glyph { transform: rotate(14deg) scale(1.08); }
+    .card h3 { margin: 22px 0 8px; font-family: var(--display); font-size: clamp(1.65rem,3vw,2.7rem); line-height: 1.05; letter-spacing: -.06em; }
+    .card p { max-width: 37ch; margin: 0; opacity: .74; font-size: .94rem; }
+    .meta { margin-top: 24px; font: 12px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .ticker { overflow: hidden; }
+    .ticker-track { width: max-content; display: flex; padding: 10px 0; animation: ticker 26s linear infinite; }
+    .ticker-track span { padding-right: 34px; font: 13px/1 var(--mono); text-transform: uppercase; }
+    footer { min-height: 220px; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end; padding: 48px 0; }
+    footer p { max-width: 34ch; margin: 0; }
+    footer .mark { font-size: clamp(4rem,9vw,8rem); font-weight: 900; line-height: .72; letter-spacing: -.1em; }
+    .copyright { margin-top: 14px; color: var(--muted); font-size: .86rem; }
 
-    .ticker {
-      overflow: hidden;
-      border-block: 2px solid var(--ink);
-      background: var(--ink);
-      color: var(--paper);
-    }
-    .ticker-track {
-      display: flex;
-      width: max-content;
-      padding: 10px 0;
-      animation: ticker 26s linear infinite;
-    }
-    .ticker-track span { padding-right: 34px; font: 13px/1 "DM Mono", monospace; text-transform: uppercase; }
+    /* 01 — cut-and-paste zine */
+    html[data-style="zine"] body { background: radial-gradient(circle at 15% 10%,rgba(245,201,69,.22),transparent 24rem), linear-gradient(rgba(32,42,34,.035) 1px,transparent 1px), linear-gradient(90deg,rgba(32,42,34,.035) 1px,transparent 1px), var(--bg); background-size: auto,24px 24px,24px 24px,auto; }
+    html[data-style="zine"] .title-top { font-size: .34em; letter-spacing: -.03em; margin: 0 0 .26em .08em; }
+    html[data-style="zine"] .title-main { color: transparent; -webkit-text-stroke: 2px var(--fg); }
+    html[data-style="zine"] .hero-note { background: var(--accent-2); border: 2px solid var(--fg); transform: rotate(2.2deg); box-shadow: 8px 8px 0 var(--fg); }
+    html[data-style="zine"] .card { border: 2px solid var(--fg); }
+    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-visible { z-index: 2; outline: 0; transform: translate(-5px,-5px); box-shadow: 9px 9px 0 var(--fg); }
+    html[data-style="zine"] .card:nth-child(1) { grid-column: span 7; background: var(--accent-3); }
+    html[data-style="zine"] .card:nth-child(2) { grid-column: span 5; color: var(--bg); background: var(--fg); }
+    html[data-style="zine"] .card:nth-child(4) { background: var(--accent-2); }
+    html[data-style="zine"] .card:nth-child(5) { background: var(--accent); }
+    html[data-style="zine"] .ticker { color: var(--bg); background: var(--fg); border-block: 2px solid var(--fg); }
 
-    footer {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 30px;
-      align-items: end;
-      min-height: 220px;
-      padding: 48px 0;
-    }
-    footer p { margin: 0; max-width: 34ch; }
-    footer .mark { font-size: clamp(4rem, 9vw, 8rem); line-height: .72; font-weight: 900; letter-spacing: -.1em; }
-    .edit-note { margin-top: 14px; color: var(--muted); font-size: .86rem; }
+    /* 02 — midnight broadcast */
+    html[data-style="midnight"] { --bg:#080b1b; --fg:#f6f4ff; --muted:#9ea5c9; --accent:#ff3ea5; --accent-2:#b9ff39; --accent-3:#51d9ff; --card:#11162e; --rule:rgba(142,229,255,.24); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
+    html[data-style="midnight"] body { background: linear-gradient(120deg,rgba(255,62,165,.12),transparent 35%), radial-gradient(circle at 85% 20%,rgba(81,217,255,.18),transparent 30rem), #080b1b; }
+    html[data-style="midnight"] body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:10; background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.018) 3px 4px); }
+    html[data-style="midnight"] .site-header, html[data-style="midnight"] .hero { border-color:var(--accent-3); }
+    html[data-style="midnight"] .edition { color:var(--accent-2); text-shadow:0 0 16px rgba(185,255,57,.65); }
+    html[data-style="midnight"] .hero { min-height:65vh; align-items:center; }
+    html[data-style="midnight"] h1 { letter-spacing:-.07em; text-transform:uppercase; text-shadow:5px 5px 0 rgba(255,62,165,.6),-4px -4px 0 rgba(81,217,255,.35); }
+    html[data-style="midnight"] .title-top { font-size:.4em; color:var(--accent-3); letter-spacing:.02em; }
+    html[data-style="midnight"] .hero-note { color:var(--bg); background:var(--accent-2); border-radius:999px 999px 12px 999px; transform:rotate(-3deg); box-shadow:0 0 40px rgba(185,255,57,.25); }
+    html[data-style="midnight"] .links { gap:10px; }
+    html[data-style="midnight"] .card { min-height:260px; border:1px solid var(--rule); border-radius:3px; background:linear-gradient(150deg,#161c3b,#0d1125); }
+    html[data-style="midnight"] .card:nth-child(1), html[data-style="midnight"] .card:nth-child(2) { grid-column:span 6; }
+    html[data-style="midnight"] .card::after { content:""; position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent-3)); transform:scaleX(0); transform-origin:left; transition:transform .25s; }
+    html[data-style="midnight"] .card:hover::after, html[data-style="midnight"] .card:focus-visible::after { transform:scaleX(1); }
+    html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-visible { outline:0; transform:translateY(-7px); box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
+    html[data-style="midnight"] .glyph { color:var(--accent-3); border-color:var(--accent-3); box-shadow:inset 0 0 16px rgba(81,217,255,.15); }
+    html[data-style="midnight"] .ticker { color:var(--bg); background:var(--accent-3); }
 
-    @keyframes ticker { to { transform: translateX(-50%); } }
-    @keyframes blink { 50% { opacity: .35; transform: scale(.7); } }
+    /* 03 — quiet Japanese editorial */
+    html[data-style="shizuka"] { --bg:#fbfbf9; --fg:#171717; --muted:#77736d; --accent:#9e241e; --accent-2:#ded9cf; --accent-3:#dfe7e2; --card:transparent; --rule:rgba(23,23,23,.2); --sans:"Shippori Mincho",serif; --display:"Shippori Mincho",serif; --wrap:min(1040px,calc(100% - 64px)); }
+    html[data-style="shizuka"] .site-header { min-height:96px; }
+    html[data-style="shizuka"] .signature { font-family:var(--display); letter-spacing:.14em; }
+    html[data-style="shizuka"] .edition { color:var(--muted); }
+    html[data-style="shizuka"] .hero { min-height:620px; grid-template-columns:1fr 180px; align-items:center; padding:80px 0; }
+    html[data-style="shizuka"] .eyebrow { letter-spacing:.22em; }
+    html[data-style="shizuka"] h1 { font-size:clamp(5rem,12vw,9rem); font-weight:600; letter-spacing:.02em; line-height:1.12; }
+    html[data-style="shizuka"] .title-top { font-size:.4em; margin-left:3.1em; }
+    html[data-style="shizuka"] .hero-note { align-self:stretch; max-width:none; padding:28px 22px; border-left:1px solid var(--fg); writing-mode:vertical-rl; letter-spacing:.12em; font-weight:400; }
+    html[data-style="shizuka"] .hero-note small { margin:0 18px 0 0; }
+    html[data-style="shizuka"] .section-head { padding-top:70px; }
+    html[data-style="shizuka"] h2 { font-family:var(--display); font-weight:600; letter-spacing:.06em; }
+    html[data-style="shizuka"] .links { display:block; }
+    html[data-style="shizuka"] .card { min-height:176px; display:grid; grid-template-columns:170px 1fr; gap:32px; align-items:center; padding:28px 0; border-top:1px solid var(--rule); }
+    html[data-style="shizuka"] .card:last-child { border-bottom:1px solid var(--rule); }
+    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-visible { outline:0; color:var(--accent); padding-left:18px; }
+    html[data-style="shizuka"] .card-top { align-self:start; }
+    html[data-style="shizuka"] .card h3 { margin-top:0; font-size:clamp(1.8rem,4vw,3.3rem); font-weight:600; letter-spacing:.02em; }
+    html[data-style="shizuka"] .glyph { width:34px; height:34px; font-size:13px; }
+    html[data-style="shizuka"] .meta { color:var(--muted); }
+    html[data-style="shizuka"] .ticker { color:var(--bg); background:var(--fg); }
 
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 24px, 680px); }
-      header { min-height: 66px; }
-      .status { font-size: 11px; }
-      .hero { grid-template-columns: 1fr; gap: 34px; padding: 52px 0 46px; }
-      h1 { font-size: clamp(3.25rem, 17vw, 6.6rem); }
-      .hero-note { justify-self: start; max-width: 82%; margin-left: 8px; }
-      .section-head { padding-top: 34px; }
-      .links { gap: 12px; padding-bottom: 50px; }
-      .card, .card:nth-child(n) { grid-column: span 12; min-height: 205px; }
-      .card:nth-child(3), .card:nth-child(4) { grid-column: span 6; min-height: 240px; }
-      .card:nth-child(3) p, .card:nth-child(4) p { font-size: .84rem; }
-      footer { grid-template-columns: 1fr; }
-      footer .mark { justify-self: end; }
-    }
+    /* 04 — toy-box pop */
+    html[data-style="candy"] { --bg:#ffd8ed; --fg:#31144a; --muted:#6c477d; --accent:#ff5a36; --accent-2:#fff16a; --accent-3:#66e6e2; --card:#fffdf6; --rule:rgba(49,20,74,.22); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
+    html[data-style="candy"] body { background:radial-gradient(circle,rgba(49,20,74,.12) 2px,transparent 2.5px) 0 0/28px 28px,var(--bg); }
+    html[data-style="candy"] .site-header { border:0; }
+    html[data-style="candy"] .signature, html[data-style="candy"] .edition { padding:9px 15px; background:var(--accent-2); border:2px solid var(--fg); border-radius:999px; box-shadow:3px 3px 0 var(--fg); }
+    html[data-style="candy"] .hero { min-height:580px; align-items:center; border:0; }
+    html[data-style="candy"] h1 { font-size:clamp(4.6rem,12vw,10rem); text-shadow:5px 5px 0 #fff,10px 10px 0 var(--accent-3); transform:rotate(-2deg); }
+    html[data-style="candy"] .title-top { display:inline; font-size:.34em; margin-right:.15em; }
+    html[data-style="candy"] .title-main { display:inline; }
+    html[data-style="candy"] .hero-note { background:var(--accent); color:white; border:3px solid var(--fg); border-radius:50% 46% 44% 52%; transform:rotate(7deg); box-shadow:7px 7px 0 var(--fg); }
+    html[data-style="candy"] .section-head span { padding:7px 12px; background:var(--accent-3); border:2px solid var(--fg); border-radius:999px; }
+    html[data-style="candy"] .links { gap:22px; }
+    html[data-style="candy"] .card { min-height:255px; border:3px solid var(--fg); border-radius:28px; box-shadow:6px 6px 0 var(--fg); }
+    html[data-style="candy"] .card:nth-child(1), html[data-style="candy"] .card:nth-child(2) { grid-column:span 6; }
+    html[data-style="candy"] .card:nth-child(1) { background:var(--accent-3); transform:rotate(-1.2deg); }
+    html[data-style="candy"] .card:nth-child(2) { background:var(--accent-2); transform:rotate(1deg); }
+    html[data-style="candy"] .card:nth-child(4) { background:#c9b4ff; transform:rotate(-1.3deg); }
+    html[data-style="candy"] .card:nth-child(5) { background:#ff9d75; transform:rotate(1.4deg); }
+    html[data-style="candy"] .card:hover, html[data-style="candy"] .card:focus-visible { z-index:2; outline:0; transform:translateY(-8px) rotate(0); box-shadow:10px 14px 0 var(--fg); }
+    html[data-style="candy"] .glyph { background:white; border-width:2px; }
+    html[data-style="candy"] .ticker { color:var(--bg); background:var(--fg); border-block:3px solid var(--fg); transform:rotate(-1deg); }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    /* 05 — green-screen terminal */
+    html[data-style="terminal"] { --bg:#071009; --fg:#82ff8c; --muted:#4cad54; --accent:#d4ff63; --accent-2:#82ff8c; --accent-3:#82ff8c; --card:#071009; --rule:rgba(130,255,140,.42); --sans:"DM Mono",monospace; --display:"DotGothic16",monospace; --mono:"DM Mono",monospace; --wrap:min(980px,calc(100% - 36px)); }
+    html[data-style="terminal"] body { background:linear-gradient(rgba(130,255,140,.025) 50%,transparent 50%) 0 0/100% 4px,var(--bg); text-shadow:0 0 8px rgba(130,255,140,.22); }
+    html[data-style="terminal"] .site-header { min-height:68px; border-style:dashed; text-transform:uppercase; }
+    html[data-style="terminal"] .signature::before { content:"> "; }
+    html[data-style="terminal"] .edition::before { content:"session: "; color:var(--muted); }
+    html[data-style="terminal"] .hero { min-height:500px; grid-template-columns:1fr; align-items:center; padding:80px 0; border-style:dashed; }
+    html[data-style="terminal"] .eyebrow::before { content:"/* "; }
+    html[data-style="terminal"] .eyebrow::after { content:" */"; }
+    html[data-style="terminal"] h1 { font-size:clamp(4.3rem,13vw,9rem); font-weight:400; letter-spacing:.02em; line-height:1; }
+    html[data-style="terminal"] .title-top { font-size:.34em; }
+    html[data-style="terminal"] .title-main::after { content:"_"; animation:cursor 1s step-end infinite; }
+    html[data-style="terminal"] .hero-note { justify-self:start; max-width:620px; padding:18px; border:1px dashed var(--fg); font-weight:400; }
+    html[data-style="terminal"] .hero-note::before { content:"$ whoami\A"; white-space:pre; color:var(--accent); }
+    html[data-style="terminal"] .section-head { border-bottom:1px dashed var(--rule); }
+    html[data-style="terminal"] h2 { font-family:var(--display); font-weight:400; }
+    html[data-style="terminal"] h2::before { content:"./"; }
+    html[data-style="terminal"] .links { display:block; }
+    html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px 1fr 90px; gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
+    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-visible { outline:0; color:var(--bg); background:var(--fg); text-shadow:none; padding-inline:16px; }
+    html[data-style="terminal"] .card-top { display:block; }
+    html[data-style="terminal"] .glyph { width:34px; height:34px; margin-top:10px; border-radius:0; }
+    html[data-style="terminal"] .card h3 { margin:0 0 7px; font-size:clamp(1.6rem,4vw,2.7rem); font-weight:400; letter-spacing:0; }
+    html[data-style="terminal"] .meta { margin:0; text-align:right; }
+    html[data-style="terminal"] .ticker { color:var(--bg); background:var(--fg); text-shadow:none; }
+    html[data-style="terminal"] footer .mark { font-family:var(--display); font-weight:400; }
+
+    @keyframes ticker { to { transform:translateX(-50%); } }
+    @keyframes cursor { 50% { opacity:0; } }
+    @media (max-width:760px) {
+      :root { --wrap:min(100% - 24px,680px); }
+      .site-header { min-height:66px; }
+      .edition { font-size:10px; }
+      .hero { grid-template-columns:1fr; gap:34px; padding:52px 0 46px; }
+      h1 { font-size:clamp(3.8rem,19vw,7rem); }
+      .hero-note { justify-self:start; max-width:82%; }
+      .section-head { padding-top:34px; }
+      .links { gap:12px; padding-bottom:50px; }
+      .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
+      footer { grid-template-columns:1fr; }
+      footer .mark { justify-self:end; }
+      html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
+      html[data-style="shizuka"] .hero { min-height:520px; grid-template-columns:1fr 74px; padding:48px 0; }
+      html[data-style="shizuka"] .hero-note { max-width:none; padding:16px 10px; font-size:.88rem; }
+      html[data-style="shizuka"] .hero-note small { display:none; }
+      html[data-style="shizuka"] .card { min-height:190px; grid-template-columns:90px 1fr; padding:24px 0; }
+      html[data-style="shizuka"] .card:hover { padding-left:8px; }
+      html[data-style="candy"] .signature { max-width:58%; white-space:nowrap; overflow:hidden; }
+      html[data-style="candy"] .hero { min-height:520px; }
+      html[data-style="candy"] h1 { font-size:clamp(4rem,21vw,7rem); }
+      html[data-style="candy"] .hero-note { max-width:72%; }
+      html[data-style="terminal"] .hero { min-height:430px; }
+      html[data-style="terminal"] .card { min-height:0; grid-template-columns:78px 1fr; gap:14px; padding:22px 0; }
+      html[data-style="terminal"] .meta { grid-column:2; text-align:left; }
     }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
   </style>
 </head>
 <body>
-  <header class="wrap">
+  <header class="site-header wrap">
     <a class="signature" href="#top">砂の砂場 / INDEX</a>
-    <span class="status">making things</span>
+    <span class="edition" id="edition-name">random edition</span>
   </header>
-
   <main id="top">
     <section class="hero wrap" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">Writer · Podcaster · Game maker</p>
-        <h1 id="page-title">言葉と音と<span class="outline">遊べるもの。</span></h1>
-      </div>
-      <aside class="hero-note">
-        <p>無機物代表として頑張ります。</p>
-        <small>sandriver / on the internet</small>
-      </aside>
+      <div><p class="eyebrow">Writer · Podcaster · Game maker</p><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1></div>
+      <aside class="hero-note"><p>無機物代表として頑張ります。</p><small>sandriver / on the internet</small></aside>
     </section>
-
     <section class="wrap" aria-labelledby="links-heading">
-      <div class="section-head">
-        <h2 id="links-heading">Links & works</h2>
-        <span>01—05 / SELECT</span>
-      </div>
-
+      <div class="section-head"><h2 id="links-heading">Links & works</h2><span>01—05 / SELECT</span></div>
       <div class="links">
-        <a class="card" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">
-          <div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div>
-          <div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p><div class="meta">@sandriver.bsky.social</div></div>
-        </a>
-
-        <a class="card" href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">
-          <div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div>
-          <div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p><div class="meta">Listen on Spotify</div></div>
-        </a>
-
-        <a class="card" href="https://note.com/sandriver" target="_blank" rel="noreferrer">
-          <div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div>
-          <div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p><div class="meta">Articles / Archive</div></div>
-        </a>
-
-        <a class="card" href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">
-          <div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div>
-          <div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p><div class="meta">Long reads / Subscribe</div></div>
-        </a>
-
-        <a class="card" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">
-          <div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div>
-          <div><h3>1999</h3><p>永遠に続く、1999年7月の夏休み。二人の女の子の物語。</p><div class="meta">Browser game / 15 min</div></div>
-        </a>
+        <a class="card" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><div class="meta">@sandriver.bsky.social</div></a>
+        <a class="card" href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="meta">Listen on Spotify</div></a>
+        <a class="card" href="https://note.com/sandriver" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="meta">Articles / Archive</div></a>
+        <a class="card" href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="meta">Long reads / Subscribe</div></a>
+        <a class="card" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div><div><h3>1999</h3><p>永遠に続く、1999年7月の夏休み。二人の女の子の物語。</p></div><div class="meta">Browser game / 15 min</div></a>
       </div>
     </section>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span>
-      </div>
-    </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span></div></div>
   </main>
-
-  <footer class="wrap">
-    <div>
-      <p>このページは、インターネット上の活動をひとつの入口にまとめた索引です。</p>
-      <p class="edit-note">© 2026 砂</p>
-    </div>
-    <div class="mark" aria-hidden="true">※</div>
-  </footer>
-
+  <footer class="wrap"><div><p>このページは、インターネット上の活動をひとつの入口にまとめた索引です。</p><p class="copyright">© 2026 砂</p></div><div class="mark" aria-hidden="true">※</div></footer>
+  <script>
+    const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', candy:'edition 04 / pop', terminal:'edition 05 / terminal' };
+    const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', candy:'#ffd8ed', terminal:'#071009' };
+    const style = window.__sandStyle || 'zine';
+    document.querySelector('#edition-name').textContent = names[style];
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', colors[style]);
+  </script>
 </body>
 </html>
