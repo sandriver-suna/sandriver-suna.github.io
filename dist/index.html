@@ -71,6 +71,17 @@
     .card-actions a.latest { border-style:dashed; }
     .card-actions a:hover { opacity:.68; }
     .card-actions a:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
+    .bsky-card-body { display:grid; gap:16px; }
+    .bsky-profile { width:max-content; max-width:100%; display:inline-flex; align-items:center; gap:8px; padding:8px 11px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
+    .bsky-profile:hover { opacity:.68; }
+    .bsky-profile:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
+    .bsky-feed { display:grid; gap:8px; }
+    .bsky-status { padding:11px; border:1px dashed currentColor; font:12px/1.5 var(--mono); }
+    .bsky-post { display:block; padding:11px; border:1px dashed currentColor; color:inherit; text-decoration:none; transition:opacity .18s ease, background .18s ease; }
+    .bsky-post:hover { opacity:.72; }
+    .bsky-post:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
+    .bsky-post-text { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:3; margin:0; font-size:.84rem; line-height:1.55; white-space:pre-wrap; }
+    .bsky-post-meta { display:flex; justify-content:space-between; gap:12px; margin-top:8px; font:11px/1.35 var(--mono); letter-spacing:.03em; opacity:.72; }
     .ticker { overflow: hidden; }
     .ticker-track { width: max-content; display: flex; padding: 10px 0; animation: ticker 26s linear infinite; }
     .ticker-track span { padding-right: 34px; font: 13px/1 var(--mono); text-transform: uppercase; }
@@ -230,7 +241,7 @@
     <section class="wrap" aria-labelledby="links-heading">
       <div class="section-head"><h2 id="links-heading">Links & works</h2><span>01—05 / SELECT</span></div>
       <div class="links">
-        <article class="card"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><div class="card-actions"><a href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">プロフィール</a><a class="latest" href="https://bsky.app/profile/sandriver.bsky.social/post/3mxbxa6hrz22h" target="_blank" rel="noreferrer">最新 / キャッスルヴァニア 暁月の円舞曲回だよ</a></div></article>
+        <article class="card bluesky-card"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">投稿を読み込み中…</p></div></div></article>
         <article class="card"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="card-actions"><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組ページ</a><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer">最新 / #169 キャッスルヴァニア 暁月の円舞曲で薄暗</a></div></article>
         <article class="card"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="card-actions"><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">記事一覧</a><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer">最新 / カリギュラ2の文章を書いたのでリンクを張るための記事</a></div></article>
         <article class="card"><div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="card-actions"><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">ホーム</a><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer">最新 / 解決不可能な問い: 茉莉絵はどうすれば幸福に至れるか？</a></div></article>
@@ -246,6 +257,62 @@
     const style = window.__sandStyle || 'zine';
     document.querySelector('#edition-name').textContent = names[style];
     document.querySelector('meta[name="theme-color"]').setAttribute('content', colors[style]);
+
+    const feed = document.querySelector('#bsky-feed');
+    const profileUrl = 'https://bsky.app/profile/sandriver.bsky.social';
+    const feedUrl = 'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=sandriver.bsky.social&filter=posts_no_replies&limit=3';
+
+    const postUrl = (post) => {
+      const rkey = post.uri.split('/').pop();
+      return profileUrl + '/post/' + encodeURIComponent(rkey);
+    };
+
+    const formatDate = (value) => new Intl.DateTimeFormat('ja-JP', {
+      month: 'numeric', day: 'numeric'
+    }).format(new Date(value));
+
+    const renderFeed = (items) => {
+      feed.replaceChildren();
+      items.forEach(({ post }) => {
+        const link = document.createElement('a');
+        link.className = 'bsky-post';
+        link.href = postUrl(post);
+        link.target = '_blank';
+        link.rel = 'noreferrer';
+
+        const text = document.createElement('p');
+        text.className = 'bsky-post-text';
+        text.textContent = post.record.text || 'Blueskyの投稿';
+
+        const meta = document.createElement('span');
+        meta.className = 'bsky-post-meta';
+        const date = document.createElement('time');
+        date.dateTime = post.record.createdAt;
+        date.textContent = formatDate(post.record.createdAt);
+        const label = document.createElement('span');
+        label.textContent = 'Blueskyで見る';
+        meta.append(date, label);
+        link.append(text, meta);
+        feed.append(link);
+      });
+      feed.setAttribute('aria-busy', 'false');
+    };
+
+    fetch(feedUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error('Bluesky feed request failed');
+        return response.json();
+      })
+      .then((data) => {
+        const items = Array.isArray(data.feed) ? data.feed.slice(0, 3) : [];
+        if (!items.length) throw new Error('Bluesky feed is empty');
+        renderFeed(items);
+      })
+      .catch(() => {
+        const status = feed.querySelector('.bsky-status');
+        if (status) status.textContent = '投稿を読み込めませんでした。プロフィールからご覧ください。';
+        feed.setAttribute('aria-busy', 'false');
+      });
   </script>
 </body>
 </html>
