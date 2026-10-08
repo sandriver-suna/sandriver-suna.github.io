@@ -9,16 +9,23 @@
   <script>
     (() => {
       const styles = ['zine', 'midnight', 'shizuka', 'candy', 'terminal'];
-      let index;
-      try {
-        const value = new Uint32Array(1);
-        crypto.getRandomValues(value);
-        index = value[0] % styles.length;
-      } catch (_) {
-        index = Math.floor(Math.random() * styles.length);
+      const cookieName = 'sand_style';
+      const saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '='));
+      let style = saved ? saved.split('=').slice(1).join('=') : '';
+      if (!styles.includes(style)) {
+        let index;
+        try {
+          const value = new Uint32Array(1);
+          crypto.getRandomValues(value);
+          index = value[0] % styles.length;
+        } catch (_) {
+          index = Math.floor(Math.random() * styles.length);
+        }
+        style = styles[index];
+        document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax';
       }
-      document.documentElement.dataset.style = styles[index];
-      window.__sandStyle = styles[index];
+      document.documentElement.dataset.style = style;
+      window.__sandStyle = style;
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,6 +66,11 @@
     .card h3 { margin: 22px 0 8px; font-family: var(--display); font-size: clamp(1.65rem,3vw,2.7rem); line-height: 1.05; letter-spacing: -.06em; }
     .card p { max-width: 37ch; margin: 0; opacity: .74; font-size: .94rem; }
     .meta { margin-top: 24px; font: 12px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .card-actions { display:grid; gap:8px; margin-top:24px; }
+    .card-actions a { display:block; padding:9px 11px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
+    .card-actions a.latest { border-style:dashed; }
+    .card-actions a:hover { opacity:.68; }
+    .card-actions a:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
     .ticker { overflow: hidden; }
     .ticker-track { width: max-content; display: flex; padding: 10px 0; animation: ticker 26s linear infinite; }
     .ticker-track span { padding-right: 34px; font: 13px/1 var(--mono); text-transform: uppercase; }
@@ -73,7 +85,7 @@
     html[data-style="zine"] .title-main { color: transparent; -webkit-text-stroke: 2px var(--fg); }
     html[data-style="zine"] .hero-note { background: var(--accent-2); border: 2px solid var(--fg); transform: rotate(2.2deg); box-shadow: 8px 8px 0 var(--fg); }
     html[data-style="zine"] .card { border: 2px solid var(--fg); }
-    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-visible { z-index: 2; outline: 0; transform: translate(-5px,-5px); box-shadow: 9px 9px 0 var(--fg); }
+    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-visible, html[data-style="zine"] .card:focus-within { z-index: 2; outline: 0; transform: translate(-5px,-5px); box-shadow: 9px 9px 0 var(--fg); }
     html[data-style="zine"] .card:nth-child(1) { grid-column: span 7; background: var(--accent-3); }
     html[data-style="zine"] .card:nth-child(2) { grid-column: span 5; color: var(--bg); background: var(--fg); }
     html[data-style="zine"] .card:nth-child(4) { background: var(--accent-2); }
@@ -95,7 +107,7 @@
     html[data-style="midnight"] .card:nth-child(1), html[data-style="midnight"] .card:nth-child(2) { grid-column:span 6; }
     html[data-style="midnight"] .card::after { content:""; position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent-3)); transform:scaleX(0); transform-origin:left; transition:transform .25s; }
     html[data-style="midnight"] .card:hover::after, html[data-style="midnight"] .card:focus-visible::after { transform:scaleX(1); }
-    html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-visible { outline:0; transform:translateY(-7px); box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
+    html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-visible, html[data-style="midnight"] .card:focus-within { outline:0; transform:translateY(-7px); box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
     html[data-style="midnight"] .glyph { color:var(--accent-3); border-color:var(--accent-3); box-shadow:inset 0 0 16px rgba(81,217,255,.15); }
     html[data-style="midnight"] .ticker { color:var(--bg); background:var(--accent-3); }
 
@@ -115,11 +127,12 @@
     html[data-style="shizuka"] .links { display:block; }
     html[data-style="shizuka"] .card { min-height:176px; display:grid; grid-template-columns:170px 1fr; gap:32px; align-items:center; padding:28px 0; border-top:1px solid var(--rule); }
     html[data-style="shizuka"] .card:last-child { border-bottom:1px solid var(--rule); }
-    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-visible { outline:0; color:var(--accent); padding-left:18px; }
+    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-visible, html[data-style="shizuka"] .card:focus-within { outline:0; color:var(--accent); padding-left:18px; }
     html[data-style="shizuka"] .card-top { align-self:start; }
     html[data-style="shizuka"] .card h3 { margin-top:0; font-size:clamp(1.8rem,4vw,3.3rem); font-weight:600; letter-spacing:.02em; }
     html[data-style="shizuka"] .glyph { width:34px; height:34px; font-size:13px; }
     html[data-style="shizuka"] .meta { color:var(--muted); }
+    html[data-style="shizuka"] .card-actions { grid-column:2; margin-top:0; }
     html[data-style="shizuka"] .ticker { color:var(--bg); background:var(--fg); }
 
     /* 04 — toy-box pop */
@@ -140,7 +153,7 @@
     html[data-style="candy"] .card:nth-child(2) { background:var(--accent-2); transform:rotate(1deg); }
     html[data-style="candy"] .card:nth-child(4) { background:#c9b4ff; transform:rotate(-1.3deg); }
     html[data-style="candy"] .card:nth-child(5) { background:#ff9d75; transform:rotate(1.4deg); }
-    html[data-style="candy"] .card:hover, html[data-style="candy"] .card:focus-visible { z-index:2; outline:0; transform:translateY(-8px) rotate(0); box-shadow:10px 14px 0 var(--fg); }
+    html[data-style="candy"] .card:hover, html[data-style="candy"] .card:focus-visible, html[data-style="candy"] .card:focus-within { z-index:2; outline:0; transform:translateY(-8px) rotate(0); box-shadow:10px 14px 0 var(--fg); }
     html[data-style="candy"] .glyph { background:white; border-width:2px; }
     html[data-style="candy"] .ticker { color:var(--bg); background:var(--fg); border-block:3px solid var(--fg); transform:rotate(-1deg); }
 
@@ -163,11 +176,12 @@
     html[data-style="terminal"] h2::before { content:"./"; }
     html[data-style="terminal"] .links { display:block; }
     html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px 1fr 90px; gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
-    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-visible { outline:0; color:var(--bg); background:var(--fg); text-shadow:none; padding-inline:16px; }
+    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-visible, html[data-style="terminal"] .card:focus-within { outline:0; color:var(--bg); background:var(--fg); text-shadow:none; padding-inline:16px; }
     html[data-style="terminal"] .card-top { display:block; }
     html[data-style="terminal"] .glyph { width:34px; height:34px; margin-top:10px; border-radius:0; }
     html[data-style="terminal"] .card h3 { margin:0 0 7px; font-size:clamp(1.6rem,4vw,2.7rem); font-weight:400; letter-spacing:0; }
     html[data-style="terminal"] .meta { margin:0; text-align:right; }
+    html[data-style="terminal"] .card-actions { margin:0; }
     html[data-style="terminal"] .ticker { color:var(--bg); background:var(--fg); text-shadow:none; }
     html[data-style="terminal"] footer .mark { font-family:var(--display); font-weight:400; }
 
@@ -198,6 +212,7 @@
       html[data-style="terminal"] .hero { min-height:430px; }
       html[data-style="terminal"] .card { min-height:0; grid-template-columns:78px 1fr; gap:14px; padding:22px 0; }
       html[data-style="terminal"] .meta { grid-column:2; text-align:left; }
+      html[data-style="terminal"] .card-actions { grid-column:2; }
     }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
   </style>
@@ -215,10 +230,10 @@
     <section class="wrap" aria-labelledby="links-heading">
       <div class="section-head"><h2 id="links-heading">Links & works</h2><span>01—05 / SELECT</span></div>
       <div class="links">
-        <a class="card" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><div class="meta">@sandriver.bsky.social</div></a>
-        <a class="card" href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="meta">Listen on Spotify</div></a>
-        <a class="card" href="https://note.com/sandriver" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="meta">Articles / Archive</div></a>
-        <a class="card" href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer"><div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="meta">Long reads / Subscribe</div></a>
+        <article class="card"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><div class="card-actions"><a href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">プロフィール</a><a class="latest" href="https://bsky.app/profile/sandriver.bsky.social/post/3mxbxa6hrz22h" target="_blank" rel="noreferrer">最新 / キャッスルヴァニア 暁月の円舞曲回だよ</a></div></article>
+        <article class="card"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="card-actions"><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組ページ</a><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer">最新 / #169 キャッスルヴァニア 暁月の円舞曲で薄暗</a></div></article>
+        <article class="card"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="card-actions"><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">記事一覧</a><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer">最新 / カリギュラ2の文章を書いたのでリンクを張るための記事</a></div></article>
+        <article class="card"><div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="card-actions"><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">ホーム</a><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer">最新 / 解決不可能な問い: 茉莉絵はどうすれば幸福に至れるか？</a></div></article>
         <a class="card" href="/works/"><div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div><div><h3>制作物一覧</h3><p>つくったゲームをまとめています。現在1作品、次の作品も準備中。</p></div><div class="meta">Games / Works</div></a>
       </div>
     </section>

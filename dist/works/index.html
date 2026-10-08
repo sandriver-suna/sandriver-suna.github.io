@@ -9,11 +9,18 @@
   <script>
     (() => {
       const styles = ['zine', 'midnight', 'shizuka', 'candy', 'terminal'];
-      let index;
-      try { const value = new Uint32Array(1); crypto.getRandomValues(value); index = value[0] % styles.length; }
-      catch (_) { index = Math.floor(Math.random() * styles.length); }
-      document.documentElement.dataset.style = styles[index];
-      window.__sandStyle = styles[index];
+      const cookieName = 'sand_style';
+      const saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '='));
+      let style = saved ? saved.split('=').slice(1).join('=') : '';
+      if (!styles.includes(style)) {
+        let index;
+        try { const value = new Uint32Array(1); crypto.getRandomValues(value); index = value[0] % styles.length; }
+        catch (_) { index = Math.floor(Math.random() * styles.length); }
+        style = styles[index];
+        document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax';
+      }
+      document.documentElement.dataset.style = style;
+      window.__sandStyle = style;
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
