@@ -286,6 +286,8 @@
       .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
       #note .latest-media, #offprint .latest-media { display:block; min-height:220px; }
       #note .latest-image, #offprint .latest-image { display:block; }
+      .card-actions, .card-actions a.latest, .latest-media { width:100%; max-width:100%; min-width:0; }
+      .latest-image { max-width:100%; }
       footer { grid-template-columns:1fr; }
       footer .mark { justify-self:end; }
       html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
