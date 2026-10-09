@@ -10,7 +10,9 @@
     (() => {
       const styles = ['zine', 'midnight', 'shizuka', 'candy', 'terminal'];
       const cookieName = 'sand_style';
-      const saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '='));
+      let saved;
+      try { saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '=')); }
+      catch (_) { saved = undefined; }
       let style = saved ? saved.split('=').slice(1).join('=') : '';
       if (!styles.includes(style)) {
         let index;
@@ -22,7 +24,8 @@
           index = Math.floor(Math.random() * styles.length);
         }
         style = styles[index];
-        document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax; Secure';
+        try { document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax; Secure'; }
+        catch (_) { /* The page can still use the selected style for this visit. */ }
       }
       document.documentElement.dataset.style = style;
       window.__sandStyle = style;
@@ -30,11 +33,11 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DotGothic16&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DotGothic16&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Shippori+Mincho:wght@400;600;700&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23202a22'/%3E%3Cpath d='M18 20h28v6H18zm0 12h20v6H18zm0 12h12v6H18z' fill='%23f2efdf'/%3E%3Ccircle cx='46' cy='44' r='6' fill='%23ff4f34'/%3E%3C/svg%3E">
   <style>
     :root {
-      --bg: #f2efdf; --fg: #202a22; --muted: #687067; --accent: #ff4f34;
+      --bg: #f2efdf; --fg: #202a22; --muted: #596159; --accent: #ff4f34;
       --accent-2: #f5c945; --accent-3: #9bd5e6; --card: #fff; --rule: rgba(32,42,34,.22);
       --sans: "Noto Sans JP", system-ui, sans-serif; --display: "Noto Sans JP", system-ui, sans-serif;
       --mono: "DM Mono", monospace; --wrap: min(1180px, calc(100% - 40px));
@@ -54,6 +57,12 @@
     .hero-note { justify-self: end; max-width: 265px; padding: 22px; font-weight: 700; }
     .hero-note p { margin: 0; }
     .hero-note small { display: block; margin-top: 18px; font: 12px/1.4 var(--mono); text-transform: uppercase; }
+    .role-line { max-width:34rem; margin:28px 0 0; font-weight:700; }
+    .quick-nav { display:grid; grid-template-columns:repeat(5,1fr); border-bottom:1px solid var(--rule); }
+    .quick-nav a { min-width:0; padding:15px 10px; border-right:1px solid var(--rule); font:12px/1.4 var(--mono); text-align:center; text-decoration:none; }
+    .quick-nav a:first-child { border-left:1px solid var(--rule); }
+    .quick-nav a:hover { background:var(--card); }
+    .quick-nav a:focus-visible { position:relative; z-index:2; outline:3px solid currentColor; outline-offset:-3px; }
     .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 44px 0 20px; }
     h2 { margin: 0; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: -.055em; }
     .section-head span { font: 13px/1.2 var(--mono); }
@@ -68,14 +77,18 @@
     .meta { margin-top: 24px; font: 12px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
     .card-actions { display:grid; gap:8px; margin-top:24px; }
     .card-actions a { display:block; padding:9px 11px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
-    .card-actions a.latest { border-style:dashed; }
+    .card-actions a.latest { display:grid; grid-template-columns:88px minmax(0,1fr); align-items:stretch; overflow:hidden; padding:0; border-style:dashed; }
+    .latest-image { width:100%; height:100%; min-height:86px; display:block; object-fit:cover; border-right:1px dashed currentColor; }
+    .latest-copy { align-self:center; padding:10px 11px; }
     .card-actions a:hover { opacity:.68; }
     .card-actions a:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
     .bsky-card-body { display:grid; gap:16px; }
+    .card > *, .bsky-card-body, .card-actions, .latest-copy { min-width:0; }
     .bsky-profile { width:max-content; max-width:100%; display:inline-flex; align-items:center; gap:8px; padding:8px 11px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
+    .bsky-profile { overflow-wrap:anywhere; }
     .bsky-profile:hover { opacity:.68; }
     .bsky-profile:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
-    .bsky-feed { display:grid; gap:8px; }
+    .bsky-feed { min-height:270px; display:grid; align-content:start; gap:8px; }
     .bsky-status { padding:11px; border:1px dashed currentColor; font:12px/1.5 var(--mono); }
     .bsky-post { display:block; padding:11px; border:1px dashed currentColor; color:inherit; text-decoration:none; transition:opacity .18s ease, background .18s ease; }
     .bsky-post:hover { opacity:.72; }
@@ -155,7 +168,7 @@
     html[data-style="candy"] h1 { font-size:clamp(4.6rem,12vw,10rem); text-shadow:5px 5px 0 #fff,10px 10px 0 var(--accent-3); transform:rotate(-2deg); }
     html[data-style="candy"] .title-top { display:inline; font-size:.34em; margin-right:.15em; }
     html[data-style="candy"] .title-main { display:inline; }
-    html[data-style="candy"] .hero-note { background:var(--accent); color:white; border:3px solid var(--fg); border-radius:50% 46% 44% 52%; transform:rotate(7deg); box-shadow:7px 7px 0 var(--fg); }
+    html[data-style="candy"] .hero-note { background:var(--accent); color:var(--fg); border:3px solid var(--fg); border-radius:50% 46% 44% 52%; transform:rotate(7deg); box-shadow:7px 7px 0 var(--fg); }
     html[data-style="candy"] .section-head span { padding:7px 12px; background:var(--accent-3); border:2px solid var(--fg); border-radius:999px; }
     html[data-style="candy"] .links { gap:22px; }
     html[data-style="candy"] .card { min-height:255px; border:3px solid var(--fg); border-radius:28px; box-shadow:6px 6px 0 var(--fg); }
@@ -186,7 +199,7 @@
     html[data-style="terminal"] h2 { font-family:var(--display); font-weight:400; }
     html[data-style="terminal"] h2::before { content:"./"; }
     html[data-style="terminal"] .links { display:block; }
-    html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px 1fr 90px; gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
+    html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px minmax(0,1fr) minmax(260px,.78fr); gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
     html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-visible, html[data-style="terminal"] .card:focus-within { outline:0; color:var(--bg); background:var(--fg); text-shadow:none; padding-inline:16px; }
     html[data-style="terminal"] .card-top { display:block; }
     html[data-style="terminal"] .glyph { width:34px; height:34px; margin-top:10px; border-radius:0; }
@@ -205,6 +218,11 @@
       .hero { grid-template-columns:1fr; gap:34px; padding:52px 0 46px; }
       h1 { font-size:clamp(3.8rem,19vw,7rem); }
       .hero-note { justify-self:start; max-width:82%; }
+      .role-line { margin-top:22px; }
+      .quick-nav { grid-template-columns:repeat(2,1fr); }
+      .quick-nav a:nth-child(odd) { border-left:1px solid var(--rule); }
+      .quick-nav a { border-top:1px solid var(--rule); }
+      .quick-nav a:last-child { grid-column:span 2; }
       .section-head { padding-top:34px; }
       .links { gap:12px; padding-bottom:50px; }
       .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
@@ -235,17 +253,18 @@
   </header>
   <main id="top">
     <section class="hero wrap" aria-labelledby="page-title">
-      <div><p class="eyebrow">Writer · Podcaster · Game maker</p><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1></div>
+      <div><p class="eyebrow">Writer · Podcaster · Game maker</p><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1><p class="role-line">ゲームについて、書いたり、話したり、つくったりしています。</p></div>
       <aside class="hero-note"><p>無機物代表として頑張ります。</p><small>sandriver / on the internet</small></aside>
     </section>
+    <nav class="quick-nav wrap" aria-label="活動へのショートカット"><a href="#bluesky">日々の投稿</a><a href="#spotify">聴く</a><a href="#note">note</a><a href="#offprint">Offprint</a><a href="#games">ゲーム</a></nav>
     <section class="wrap" aria-labelledby="links-heading">
-      <div class="section-head"><h2 id="links-heading">Links & works</h2><span>01—05 / SELECT</span></div>
+      <div class="section-head"><h2 id="links-heading">Links &amp; works</h2><span>01—05 / SELECT</span></div>
       <div class="links">
-        <article class="card bluesky-card"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">投稿を読み込み中…</p></div></div></article>
-        <article class="card"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="card-actions"><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組ページ</a><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer">最新 / #169 キャッスルヴァニア 暁月の円舞曲で薄暗</a></div></article>
-        <article class="card"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="card-actions"><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">記事一覧</a><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer">最新 / カリギュラ2の文章を書いたのでリンクを張るための記事</a></div></article>
-        <article class="card"><div class="card-top"><span class="index">04 / PRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="card-actions"><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">ホーム</a><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer">最新 / 解決不可能な問い: 茉莉絵はどうすれば幸福に至れるか？</a></div></article>
-        <a class="card" href="/works/"><div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div><div><h3>制作物一覧</h3><p>つくったゲームをまとめています。現在1作品、次の作品も準備中。</p></div><div class="meta">Games / Works</div></a>
+        <article class="card bluesky-card" id="bluesky"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">最近の投稿を取得しています。表示されない場合はプロフィールをご覧ください。</p></div></div></article>
+        <article class="card" id="spotify"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="card-actions"><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">Spotifyで聴く</a><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer"><img class="latest-image" src="/assets/spotify-latest.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><span class="latest-copy">最新 / #169 キャッスルヴァニア 暁月の円舞曲で薄暗</span></a></div></article>
+        <article class="card" id="note"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="card-actions"><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">noteの記事一覧</a><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer"><img class="latest-image" src="/assets/note-latest.jpg" alt="" width="720" height="377" loading="lazy" decoding="async"><span class="latest-copy">最新 / カリギュラ2の文章を書いたのでリンクを張るための記事</span></a></div></article>
+        <article class="card" id="offprint"><div class="card-top"><span class="index">04 / ESSAYS</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="card-actions"><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">Offprintの記事一覧</a><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer"><img class="latest-image" src="/assets/offprint-latest.jpg" alt="" width="720" height="378" loading="lazy" decoding="async"><span class="latest-copy">最新 / 解決不可能な問い: 茉莉絵はどうすれば幸福に至れるか？</span></a></div></article>
+        <a class="card" id="games" href="/works/"><div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div><div><h3>つくったゲーム</h3><p>『1999』—終わらない1999年7月の夏休み。ブラウザで約15分。次の作品も制作中です。</p></div><div class="meta">1999 / Works</div></a>
       </div>
     </section>
     <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span></div></div>
@@ -260,20 +279,25 @@
 
     const feed = document.querySelector('#bsky-feed');
     const profileUrl = 'https://bsky.app/profile/sandriver.bsky.social';
-    const feedUrl = 'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=sandriver.bsky.social&filter=posts_no_replies&limit=3';
+    const feedUrl = 'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=sandriver.bsky.social&filter=posts_no_replies&limit=8';
 
     const postUrl = (post) => {
-      const rkey = post.uri.split('/').pop();
+      const match = typeof post.uri === 'string' && post.uri.match(/\/app\.bsky\.feed\.post\/([^/]+)$/);
+      if (!match) throw new Error('Invalid Bluesky post URI');
+      const rkey = match[1];
       return profileUrl + '/post/' + encodeURIComponent(rkey);
     };
 
-    const formatDate = (value) => new Intl.DateTimeFormat('ja-JP', {
-      month: 'numeric', day: 'numeric'
-    }).format(new Date(value));
+    const formatDate = (value) => {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) throw new Error('Invalid Bluesky post date');
+      return new Intl.DateTimeFormat('ja-JP', { month: 'numeric', day: 'numeric' }).format(date);
+    };
 
     const renderFeed = (items) => {
-      feed.replaceChildren();
+      const fragment = document.createDocumentFragment();
       items.forEach(({ post }) => {
+        if (!post || !post.record || typeof post.record.text !== 'string') throw new Error('Invalid Bluesky post');
         const link = document.createElement('a');
         link.className = 'bsky-post';
         link.href = postUrl(post);
@@ -282,7 +306,7 @@
 
         const text = document.createElement('p');
         text.className = 'bsky-post-text';
-        text.textContent = post.record.text || 'Blueskyの投稿';
+        text.textContent = post.record.text.trim() || 'Blueskyの投稿';
 
         const meta = document.createElement('span');
         meta.className = 'bsky-post-meta';
@@ -293,26 +317,36 @@
         label.textContent = 'Blueskyで見る';
         meta.append(date, label);
         link.append(text, meta);
-        feed.append(link);
+        fragment.append(link);
       });
+      feed.replaceChildren(fragment);
       feed.setAttribute('aria-busy', 'false');
     };
 
-    fetch(feedUrl)
+    const showFeedError = () => {
+      const status = document.createElement('p');
+      status.className = 'bsky-status';
+      status.textContent = '投稿を読み込めませんでした。プロフィールからご覧ください。';
+      feed.replaceChildren(status);
+      feed.setAttribute('aria-busy', 'false');
+    };
+
+    const feedController = new AbortController();
+    const feedTimeout = window.setTimeout(() => feedController.abort(), 8000);
+    fetch(feedUrl, { signal: feedController.signal })
       .then((response) => {
         if (!response.ok) throw new Error('Bluesky feed request failed');
         return response.json();
       })
       .then((data) => {
-        const items = Array.isArray(data.feed) ? data.feed.slice(0, 3) : [];
+        const items = Array.isArray(data.feed)
+          ? data.feed.filter((item) => !item.reason && item.post?.author?.handle === 'sandriver.bsky.social').slice(0, 3)
+          : [];
         if (!items.length) throw new Error('Bluesky feed is empty');
         renderFeed(items);
       })
-      .catch(() => {
-        const status = feed.querySelector('.bsky-status');
-        if (status) status.textContent = '投稿を読み込めませんでした。プロフィールからご覧ください。';
-        feed.setAttribute('aria-busy', 'false');
-      });
+      .catch(showFeedError)
+      .finally(() => window.clearTimeout(feedTimeout));
   </script>
 </body>
 </html>
