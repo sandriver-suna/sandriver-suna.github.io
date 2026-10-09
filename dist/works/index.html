@@ -44,24 +44,26 @@
     header { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-bottom:1px solid var(--rule); }
     .home { font:500 14px/1.2 var(--mono); text-decoration:none; }
     .edition { font:12px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
-    .hero { min-height:510px; display:grid; grid-template-columns:1.4fr .6fr; gap:48px; align-items:center; padding:72px 0; border-bottom:1px solid var(--rule); }
+    .hero { min-height:360px; display:grid; grid-template-columns:1.4fr .6fr; gap:48px; align-items:center; padding:58px 0; border-bottom:1px solid var(--rule); }
     .eyebrow { margin:0 0 20px; font:13px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; }
-    h1 { margin:0; font:900 clamp(4.5rem,11vw,9rem)/.9 var(--display); letter-spacing:-.09em; }
+    h1 { margin:0; font:900 clamp(4rem,9vw,7.5rem)/.9 var(--display); letter-spacing:-.09em; }
     .intro { max-width:20rem; margin:0; font-size:1.15rem; font-weight:700; }
     .count { display:block; margin-top:20px; color:var(--muted); font:12px/1.4 var(--mono); text-transform:uppercase; }
     .intro .count { color:inherit; }
-    .works { padding:68px 0 90px; }
-    .work { position:relative; display:grid; grid-template-columns:80px minmax(220px,290px) minmax(0,1fr) 150px; gap:28px; align-items:center; min-height:300px; padding:34px; color:var(--fg); background:var(--card); border:2px solid var(--fg); text-decoration:none; transition:transform .22s,box-shadow .22s,color .2s,background .2s; }
+    .works { padding:48px 0 90px; }
+    .work { position:relative; display:grid; grid-template-columns:64px minmax(340px,1.25fr) minmax(280px,.75fr); grid-template-rows:auto 1fr; gap:24px 30px; align-items:start; min-height:390px; padding:34px; color:var(--fg); background:var(--card); border:2px solid var(--fg); text-decoration:none; transition:transform .22s,box-shadow .22s,color .2s,background .2s; }
+    .work > * { min-width:0; }
     .work + .work { margin-top:24px; }
-    .number { align-self:start; font:13px/1.2 var(--mono); }
-    .work-art { width:100%; aspect-ratio:973/615; display:block; object-fit:cover; border:1px solid currentColor; }
+    .number { grid-row:1 / span 2; align-self:start; font:13px/1.2 var(--mono); }
+    .work-art { grid-row:1 / span 2; width:100%; aspect-ratio:973/615; display:block; object-fit:cover; border:1px solid currentColor; }
     .work-copy { min-width:0; }
     .work h2 { margin:0 0 10px; font:900 clamp(2.8rem,7vw,6rem)/.9 var(--display); letter-spacing:-.075em; }
     .work p { max-width:39rem; margin:0; }
     .facts { align-self:end; font:12px/1.7 var(--mono); text-transform:uppercase; }
     .action { display:block; margin-top:18px; font-weight:700; text-decoration:underline; text-underline-offset:.3em; }
     .work:hover, .work:focus-visible { outline:0; transform:translate(-5px,-5px); box-shadow:9px 9px 0 var(--fg); }
-    .soon { grid-template-columns:110px minmax(0,1fr) 170px; min-height:180px; border-style:dashed; background:transparent; opacity:.66; }
+    .soon { grid-template-columns:110px minmax(0,1fr) 170px; grid-template-rows:1fr; min-height:160px; border-style:dashed; background:transparent; opacity:.66; }
+    .soon .number { grid-row:auto; }
     .soon:hover { transform:none; box-shadow:none; }
     footer { min-height:180px; display:flex; justify-content:space-between; align-items:flex-end; gap:30px; padding:46px 0; border-top:1px solid var(--rule); }
     footer p { margin:0; }
@@ -84,10 +86,10 @@
 
     html[data-style="shizuka"] { --bg:#fbfbf9; --fg:#171717; --muted:#77736d; --accent:#9e241e; --accent2:#ded9cf; --card:transparent; --rule:rgba(23,23,23,.2); --sans:"Shippori Mincho",serif; --display:"Shippori Mincho",serif; --wrap:min(980px,calc(100% - 64px)); }
     html[data-style="shizuka"] .home { font-family:var(--display); letter-spacing:.12em; }
-    html[data-style="shizuka"] .hero { grid-template-columns:1fr 170px; }
+    html[data-style="shizuka"] .hero { min-height:430px; grid-template-columns:1fr 170px; }
     html[data-style="shizuka"] h1 { font-weight:600; letter-spacing:.05em; }
     html[data-style="shizuka"] .intro { align-self:stretch; padding:20px; border-left:1px solid var(--fg); writing-mode:vertical-rl; letter-spacing:.1em; font-weight:400; }
-    html[data-style="shizuka"] .work { grid-template-columns:70px 230px minmax(0,1fr) 130px; padding:38px 0; border:0; border-top:1px solid var(--rule); }
+    html[data-style="shizuka"] .work { grid-template-columns:64px minmax(320px,1.25fr) minmax(260px,.75fr); padding:38px 0; border:0; border-top:1px solid var(--rule); }
     html[data-style="shizuka"] .soon { grid-template-columns:100px minmax(0,1fr) 150px; }
     html[data-style="shizuka"] .work:last-child { border-bottom:1px solid var(--rule); }
     html[data-style="shizuka"] .work h2 { font-weight:600; letter-spacing:.04em; }
@@ -115,7 +117,7 @@
     html[data-style="terminal"] h1::after { content:"_"; animation:cursor 1s step-end infinite; }
     html[data-style="terminal"] .intro { max-width:600px; padding:18px; border:1px dashed var(--fg); font-weight:400; }
     html[data-style="terminal"] .intro::before { content:"$ ls ./works\A"; display:block; white-space:pre; color:var(--accent); }
-    html[data-style="terminal"] .work { grid-template-columns:70px 220px minmax(0,1fr) 140px; min-height:240px; padding:30px 0; border:0; border-bottom:1px dashed var(--rule); }
+    html[data-style="terminal"] .work { grid-template-columns:64px minmax(300px,1.2fr) minmax(260px,.8fr); min-height:360px; padding:30px 0; border:0; border-bottom:1px dashed var(--rule); }
     html[data-style="terminal"] .soon { grid-template-columns:90px minmax(0,1fr) 160px; min-height:170px; }
     html[data-style="terminal"] .work:first-child { border-top:1px dashed var(--rule); }
     html[data-style="terminal"] .work h2 { font-weight:400; letter-spacing:0; }
@@ -125,13 +127,15 @@
 
     @media (max-width:980px) {
       :root { --wrap:min(100% - 24px,680px); }
+      html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
       header { min-height:66px; }
       .edition { font-size:10px; }
-      .hero, html[data-style="shizuka"] .hero { min-height:470px; grid-template-columns:1fr; gap:34px; padding:52px 0; }
+      .hero, html[data-style="shizuka"] .hero { min-height:0; grid-template-columns:1fr; gap:34px; padding:52px 0; }
       h1 { font-size:clamp(4rem,20vw,7rem); }
       .intro, html[data-style="shizuka"] .intro { justify-self:start; max-width:82%; writing-mode:horizontal-tb; border-left:0; }
       .works { padding:42px 0 64px; }
-      .work, html[data-style] .work { grid-template-columns:1fr; gap:18px; min-height:300px; padding:26px; }
+      .work, html[data-style] .work { grid-template-columns:minmax(0,1fr); gap:18px; min-height:300px; padding:26px; }
+      .work .number, .work .work-art { grid-row:auto; }
       .facts { align-self:auto; }
       html[data-style="shizuka"] .work, html[data-style="terminal"] .work { padding:28px 0; }
       html[data-style="shizuka"] .work:hover, html[data-style="terminal"] .work:hover { padding-inline:0; }
@@ -145,18 +149,18 @@
   <main>
     <section class="hero wrap">
       <div><p class="eyebrow">Games &amp; interactive works</p><h1>制作物</h1></div>
-      <p class="intro">つくったゲームをまとめています。現在は『1999』を公開中。次の作品も制作中です。<span class="count">1 released / next in progress</span></p>
+      <p class="intro">遊べるものを、ここに。いまは『1999』を公開しています。<span class="count">1 released / next in progress</span></p>
     </section>
     <section class="works wrap" aria-label="制作物一覧">
       <a class="work released" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">
         <span class="number">01 / RELEASED</span>
         <img class="work-art" src="/assets/game-1999.png" alt="『1999』のキービジュアル" width="973" height="615" decoding="async">
-        <div class="work-copy"><h2>1999</h2><p>永遠に続く、1999年7月の夏休み。ループする世紀末の夏休みに閉じ込められた二人の女の子の話です。</p><span class="action">『1999』の作品ページへ</span></div>
+        <div class="work-copy"><h2>1999</h2><p>1999年7月。終わらない夏休みに閉じ込められた、二人の女の子の物語。</p><span class="action">ブラウザで遊ぶ →</span></div>
         <div class="facts">ブラウザゲーム<br>プレイ時間：約15分</div>
       </a>
       <article class="work soon">
         <span class="number">02 / IN PROGRESS</span>
-        <div class="work-copy"><h2>Next game</h2><p>次の作品も制作中です。公開されたら、ここに追加します。</p></div>
+        <div class="work-copy"><h2>つぎのゲーム</h2><p>もうひとつ、制作中です。公開されたらここに並びます。</p></div>
         <div class="facts">制作中</div>
       </article>
     </section>

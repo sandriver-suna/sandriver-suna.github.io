@@ -66,21 +66,45 @@
     .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 44px 0 20px; }
     h2 { margin: 0; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: -.055em; }
     .section-head span { font: 13px/1.2 var(--mono); }
+    .featured-work { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr); min-height:440px; overflow:hidden; color:var(--fg); background:var(--card); border:2px solid currentColor; transition:transform .22s ease,box-shadow .22s ease; }
+    .featured-media { position:relative; min-height:440px; overflow:hidden; background:#111; }
+    a.featured-media { display:block; color:inherit; }
+    .featured-media img { width:100%; height:100%; display:block; object-fit:cover; transition:transform .55s cubic-bezier(.2,.8,.2,1); }
+    .featured-tag { position:absolute; left:18px; bottom:18px; padding:7px 10px; color:#fff; background:#111; font:12px/1.2 var(--mono); letter-spacing:.05em; }
+    .featured-copy { display:flex; flex-direction:column; justify-content:space-between; gap:28px; padding:34px; }
+    .featured-copy h3 { margin:0; font:900 clamp(4rem,8vw,7rem)/.85 var(--display); letter-spacing:-.08em; }
+    .featured-copy p { max-width:26rem; margin:18px 0 0; font-weight:700; }
+    .featured-actions { display:grid; gap:8px; padding-top:18px; border-top:1px solid currentColor; }
+    .featured-actions a { min-height:44px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:10px 12px; border:1px solid currentColor; font:13px/1.4 var(--mono); text-decoration:none; }
+    .featured-actions a::after { content:"→"; font-size:1.2rem; }
+    .featured-actions a:first-child { color:var(--bg); background:var(--fg); }
+    .featured-actions a:hover { opacity:.76; }
+    .featured-actions a:focus-visible, a.featured-media:focus-visible { outline:4px solid currentColor; outline-offset:-4px; }
+    .featured-work:hover .featured-media img { transform:scale(1.035); }
     .links { display: grid; grid-template-columns: repeat(12,1fr); gap: 18px; padding-bottom: 74px; }
-    .card { position: relative; grid-column: span 4; min-height: 238px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 24px; color: var(--fg); background: var(--card); text-decoration: none; transition: transform .22s ease, box-shadow .22s ease, color .2s, background .2s; }
+    .card { position: relative; grid-column: span 6; min-height: 238px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 24px; color: var(--fg); background: var(--card); text-decoration: none; transition: box-shadow .22s ease, color .2s, background .2s; }
     .card-top { display: flex; justify-content: space-between; gap: 24px; }
     .index { font: 13px/1.2 var(--mono); }
     .glyph { width: 46px; height: 46px; display: grid; place-items: center; border: 1.5px solid currentColor; border-radius: 50%; font: 18px/1 var(--mono); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
-    .card:hover .glyph { transform: rotate(14deg) scale(1.08); }
+    .card:focus-within .glyph, .card:hover .glyph { transform: rotate(14deg) scale(1.08); }
     .card h3 { margin: 22px 0 8px; font-family: var(--display); font-size: clamp(1.65rem,3vw,2.7rem); line-height: 1.05; letter-spacing: -.06em; }
     .card p { max-width: 37ch; margin: 0; opacity: .74; font-size: .94rem; }
     .meta { margin-top: 24px; font: 12px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
     .card-actions { display:grid; gap:8px; margin-top:24px; }
-    .card-actions a { display:block; padding:9px 11px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
-    .card-actions a.latest { display:grid; grid-template-columns:88px minmax(0,1fr); align-items:stretch; overflow:hidden; padding:0; border-style:dashed; }
-    .latest-image { width:100%; height:100%; min-height:86px; display:block; object-fit:cover; border-right:1px dashed currentColor; }
-    .latest-copy { align-self:center; padding:10px 11px; }
-    .card-actions a:hover { opacity:.68; }
+    .card-actions a { display:flex; min-height:44px; align-items:center; padding:10px 12px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
+    .card-actions a.latest { display:grid; grid-template-columns:1fr; align-items:stretch; overflow:hidden; padding:0; border-style:dashed; }
+    .latest-media { position:relative; aspect-ratio:16/9; overflow:hidden; border-bottom:1px dashed currentColor; background:rgba(0,0,0,.08); }
+    .latest-image { width:100%; height:100%; display:block; object-fit:cover; transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+    .latest-label { position:absolute; top:10px; left:10px; padding:5px 8px; color:var(--bg); background:var(--fg); font:10px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+    .latest-copy { display:grid; gap:5px; align-self:center; padding:13px 14px 15px; }
+    .latest-date { font:11px/1.3 var(--mono); opacity:.68; }
+    .latest-title { font:700 1.15rem/1.5 var(--sans); letter-spacing:0; }
+    .latest-summary { font:13px/1.55 var(--sans); opacity:.74; }
+    #note h3, #offprint h3 { font-size:clamp(1.45rem,2.2vw,2rem); line-height:1.18; }
+    #spotify .latest-media { background:var(--bg); }
+    #spotify .latest-image { object-fit:contain; padding:12px; }
+    .card-actions a:hover { opacity:.78; }
+    .card-actions a.latest:hover .latest-image { transform:scale(1.035); }
     .card-actions a:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
     .bsky-card-body { display:grid; gap:16px; }
     .card > *, .bsky-card-body, .card-actions, .latest-copy { min-width:0; }
@@ -88,7 +112,7 @@
     .bsky-profile { overflow-wrap:anywhere; }
     .bsky-profile:hover { opacity:.68; }
     .bsky-profile:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
-    .bsky-feed { min-height:270px; display:grid; align-content:start; gap:8px; }
+    .bsky-feed { display:grid; align-content:start; gap:8px; }
     .bsky-status { padding:11px; border:1px dashed currentColor; font:12px/1.5 var(--mono); }
     .bsky-post { display:block; padding:11px; border:1px dashed currentColor; color:inherit; text-decoration:none; transition:opacity .18s ease, background .18s ease; }
     .bsky-post:hover { opacity:.72; }
@@ -108,12 +132,14 @@
     html[data-style="zine"] .title-top { font-size: .34em; letter-spacing: -.03em; margin: 0 0 .26em .08em; }
     html[data-style="zine"] .title-main { color: transparent; -webkit-text-stroke: 2px var(--fg); }
     html[data-style="zine"] .hero-note { background: var(--accent-2); border: 2px solid var(--fg); transform: rotate(2.2deg); box-shadow: 8px 8px 0 var(--fg); }
+    html[data-style="zine"] .featured-work { background:var(--accent-2); box-shadow:10px 10px 0 var(--fg); }
+    html[data-style="zine"] .featured-work:hover { transform:translate(-4px,-4px); box-shadow:14px 14px 0 var(--fg); }
     html[data-style="zine"] .card { border: 2px solid var(--fg); }
-    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-visible, html[data-style="zine"] .card:focus-within { z-index: 2; outline: 0; transform: translate(-5px,-5px); box-shadow: 9px 9px 0 var(--fg); }
-    html[data-style="zine"] .card:nth-child(1) { grid-column: span 7; background: var(--accent-3); }
-    html[data-style="zine"] .card:nth-child(2) { grid-column: span 5; color: var(--bg); background: var(--fg); }
-    html[data-style="zine"] .card:nth-child(4) { background: var(--accent-2); }
-    html[data-style="zine"] .card:nth-child(5) { background: var(--accent); }
+    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-within { z-index: 2; outline: 0; box-shadow: 7px 7px 0 var(--fg); }
+    html[data-style="zine"] #spotify { color: var(--bg); background: var(--fg); }
+    html[data-style="zine"] #note { background: var(--accent-3); }
+    html[data-style="zine"] #offprint { background: var(--accent-2); }
+    html[data-style="zine"] #bluesky { background: var(--accent); }
     html[data-style="zine"] .ticker { color: var(--bg); background: var(--fg); border-block: 2px solid var(--fg); }
 
     /* 02 — midnight broadcast */
@@ -126,12 +152,14 @@
     html[data-style="midnight"] h1 { letter-spacing:-.07em; text-transform:uppercase; text-shadow:5px 5px 0 rgba(255,62,165,.6),-4px -4px 0 rgba(81,217,255,.35); }
     html[data-style="midnight"] .title-top { font-size:.4em; color:var(--accent-3); letter-spacing:.02em; }
     html[data-style="midnight"] .hero-note { color:var(--bg); background:var(--accent-2); border-radius:999px 999px 12px 999px; transform:rotate(-3deg); box-shadow:0 0 40px rgba(185,255,57,.25); }
+    html[data-style="midnight"] .featured-work { border:1px solid var(--accent-3); background:linear-gradient(145deg,#161c3b,#0d1125); box-shadow:0 0 45px rgba(81,217,255,.12); }
+    html[data-style="midnight"] .featured-tag { color:var(--bg); background:var(--accent-2); }
+    html[data-style="midnight"] .featured-work:hover { box-shadow:0 20px 65px rgba(0,0,0,.55),0 0 35px rgba(81,217,255,.2); }
     html[data-style="midnight"] .links { gap:10px; }
     html[data-style="midnight"] .card { min-height:260px; border:1px solid var(--rule); border-radius:3px; background:linear-gradient(150deg,#161c3b,#0d1125); }
-    html[data-style="midnight"] .card:nth-child(1), html[data-style="midnight"] .card:nth-child(2) { grid-column:span 6; }
     html[data-style="midnight"] .card::after { content:""; position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent-3)); transform:scaleX(0); transform-origin:left; transition:transform .25s; }
     html[data-style="midnight"] .card:hover::after, html[data-style="midnight"] .card:focus-visible::after { transform:scaleX(1); }
-    html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-visible, html[data-style="midnight"] .card:focus-within { outline:0; transform:translateY(-7px); box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
+    html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-within { outline:0; box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
     html[data-style="midnight"] .glyph { color:var(--accent-3); border-color:var(--accent-3); box-shadow:inset 0 0 16px rgba(81,217,255,.15); }
     html[data-style="midnight"] .ticker { color:var(--bg); background:var(--accent-3); }
 
@@ -148,10 +176,12 @@
     html[data-style="shizuka"] .hero-note small { margin:0 18px 0 0; }
     html[data-style="shizuka"] .section-head { padding-top:70px; }
     html[data-style="shizuka"] h2 { font-family:var(--display); font-weight:600; letter-spacing:.06em; }
+    html[data-style="shizuka"] .featured-work { grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr); border-width:1px 0; }
+    html[data-style="shizuka"] .featured-copy h3 { font-weight:600; letter-spacing:.04em; }
     html[data-style="shizuka"] .links { display:block; }
     html[data-style="shizuka"] .card { min-height:176px; display:grid; grid-template-columns:170px 1fr; gap:32px; align-items:center; padding:28px 0; border-top:1px solid var(--rule); }
     html[data-style="shizuka"] .card:last-child { border-bottom:1px solid var(--rule); }
-    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-visible, html[data-style="shizuka"] .card:focus-within { outline:0; color:var(--accent); padding-left:18px; }
+    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-within { outline:0; color:var(--accent); }
     html[data-style="shizuka"] .card-top { align-self:start; }
     html[data-style="shizuka"] .card h3 { margin-top:0; font-size:clamp(1.8rem,4vw,3.3rem); font-weight:600; letter-spacing:.02em; }
     html[data-style="shizuka"] .glyph { width:34px; height:34px; font-size:13px; }
@@ -170,14 +200,16 @@
     html[data-style="candy"] .title-main { display:inline; }
     html[data-style="candy"] .hero-note { background:var(--accent); color:var(--fg); border:3px solid var(--fg); border-radius:50% 46% 44% 52%; transform:rotate(7deg); box-shadow:7px 7px 0 var(--fg); }
     html[data-style="candy"] .section-head span { padding:7px 12px; background:var(--accent-3); border:2px solid var(--fg); border-radius:999px; }
+    html[data-style="candy"] .featured-work { border:3px solid var(--fg); border-radius:34px; background:var(--accent-2); box-shadow:8px 8px 0 var(--fg); }
+    html[data-style="candy"] .featured-media { border-radius:30px 0 0 30px; }
+    html[data-style="candy"] .featured-work:hover { box-shadow:12px 14px 0 var(--fg); }
     html[data-style="candy"] .links { gap:22px; }
     html[data-style="candy"] .card { min-height:255px; border:3px solid var(--fg); border-radius:28px; box-shadow:6px 6px 0 var(--fg); }
-    html[data-style="candy"] .card:nth-child(1), html[data-style="candy"] .card:nth-child(2) { grid-column:span 6; }
-    html[data-style="candy"] .card:nth-child(1) { background:var(--accent-3); transform:rotate(-1.2deg); }
-    html[data-style="candy"] .card:nth-child(2) { background:var(--accent-2); transform:rotate(1deg); }
-    html[data-style="candy"] .card:nth-child(4) { background:#c9b4ff; transform:rotate(-1.3deg); }
-    html[data-style="candy"] .card:nth-child(5) { background:#ff9d75; transform:rotate(1.4deg); }
-    html[data-style="candy"] .card:hover, html[data-style="candy"] .card:focus-visible, html[data-style="candy"] .card:focus-within { z-index:2; outline:0; transform:translateY(-8px) rotate(0); box-shadow:10px 14px 0 var(--fg); }
+    html[data-style="candy"] #spotify { background:var(--accent-3); }
+    html[data-style="candy"] #note { background:var(--accent-2); }
+    html[data-style="candy"] #offprint { background:#c9b4ff; }
+    html[data-style="candy"] #bluesky { background:#ff9d75; }
+    html[data-style="candy"] .card:hover, html[data-style="candy"] .card:focus-within { z-index:2; outline:0; box-shadow:10px 14px 0 var(--fg); }
     html[data-style="candy"] .glyph { background:white; border-width:2px; }
     html[data-style="candy"] .ticker { color:var(--bg); background:var(--fg); border-block:3px solid var(--fg); transform:rotate(-1deg); }
 
@@ -198,9 +230,12 @@
     html[data-style="terminal"] .section-head { border-bottom:1px dashed var(--rule); }
     html[data-style="terminal"] h2 { font-family:var(--display); font-weight:400; }
     html[data-style="terminal"] h2::before { content:"./"; }
+    html[data-style="terminal"] .featured-work { grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr); border:1px dashed var(--fg); }
+    html[data-style="terminal"] .featured-copy h3 { font-weight:400; letter-spacing:0; }
+    html[data-style="terminal"] .featured-tag { color:var(--bg); background:var(--fg); }
     html[data-style="terminal"] .links { display:block; }
     html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px minmax(0,1fr) minmax(260px,.78fr); gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
-    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-visible, html[data-style="terminal"] .card:focus-within { outline:0; color:var(--bg); background:var(--fg); text-shadow:none; padding-inline:16px; }
+    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-within { outline:0; box-shadow:inset 4px 0 0 var(--fg); }
     html[data-style="terminal"] .card-top { display:block; }
     html[data-style="terminal"] .glyph { width:34px; height:34px; margin-top:10px; border-radius:0; }
     html[data-style="terminal"] .card h3 { margin:0 0 7px; font-size:clamp(1.6rem,4vw,2.7rem); font-weight:400; letter-spacing:0; }
@@ -215,7 +250,7 @@
       :root { --wrap:min(100% - 24px,680px); }
       .site-header { min-height:66px; }
       .edition { font-size:10px; }
-      .hero { grid-template-columns:1fr; gap:34px; padding:52px 0 46px; }
+      .hero { min-height:0; grid-template-columns:1fr; gap:34px; padding:52px 0 46px; }
       h1 { font-size:clamp(3.8rem,19vw,7rem); }
       .hero-note { justify-self:start; max-width:82%; }
       .role-line { margin-top:22px; }
@@ -224,24 +259,30 @@
       .quick-nav a { border-top:1px solid var(--rule); }
       .quick-nav a:last-child { grid-column:span 2; }
       .section-head { padding-top:34px; }
+      .featured-work, html[data-style="shizuka"] .featured-work, html[data-style="terminal"] .featured-work { grid-template-columns:1fr; min-height:0; }
+      .featured-media { min-height:0; aspect-ratio:973/615; }
+      .featured-copy { padding:24px; }
+      .featured-copy h3 { font-size:clamp(3.8rem,18vw,6rem); }
+      html[data-style="candy"] .featured-media { border-radius:30px 30px 0 0; }
       .links { gap:12px; padding-bottom:50px; }
       .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
       footer { grid-template-columns:1fr; }
       footer .mark { justify-self:end; }
       html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
-      html[data-style="shizuka"] .hero { min-height:520px; grid-template-columns:1fr 74px; padding:48px 0; }
+      html[data-style="shizuka"] .hero { min-height:430px; grid-template-columns:1fr 74px; padding:48px 0; }
       html[data-style="shizuka"] .hero-note { max-width:none; padding:16px 10px; font-size:.88rem; }
       html[data-style="shizuka"] .hero-note small { display:none; }
-      html[data-style="shizuka"] .card { min-height:190px; grid-template-columns:90px 1fr; padding:24px 0; }
-      html[data-style="shizuka"] .card:hover { padding-left:8px; }
+      html[data-style="shizuka"] .card { min-height:190px; grid-template-columns:1fr; gap:14px; padding:24px 0; }
+      html[data-style="shizuka"] .card-actions { grid-column:1; }
       html[data-style="candy"] .signature { max-width:58%; white-space:nowrap; overflow:hidden; }
       html[data-style="candy"] .hero { min-height:520px; }
       html[data-style="candy"] h1 { font-size:clamp(4rem,21vw,7rem); }
       html[data-style="candy"] .hero-note { max-width:72%; }
       html[data-style="terminal"] .hero { min-height:430px; }
-      html[data-style="terminal"] .card { min-height:0; grid-template-columns:78px 1fr; gap:14px; padding:22px 0; }
-      html[data-style="terminal"] .meta { grid-column:2; text-align:left; }
-      html[data-style="terminal"] .card-actions { grid-column:2; }
+      html[data-style="terminal"] .card { min-height:0; grid-template-columns:1fr; gap:14px; padding:22px 0; }
+      html[data-style="terminal"] .meta { grid-column:1; text-align:left; }
+      html[data-style="terminal"] .card-actions { grid-column:1; }
+      html[data-style] .hero { min-height:0; padding-top:40px; padding-bottom:38px; }
     }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
   </style>
@@ -256,20 +297,26 @@
       <div><p class="eyebrow">Writer · Podcaster · Game maker</p><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1><p class="role-line">ゲームについて、書いたり、話したり、つくったりしています。</p></div>
       <aside class="hero-note"><p>無機物代表として頑張ります。</p><small>sandriver / on the internet</small></aside>
     </section>
-    <nav class="quick-nav wrap" aria-label="活動へのショートカット"><a href="#bluesky">日々の投稿</a><a href="#spotify">聴く</a><a href="#note">note</a><a href="#offprint">Offprint</a><a href="#games">ゲーム</a></nav>
+    <nav class="quick-nav wrap" aria-label="活動へのショートカット"><a href="#games">ゲーム</a><a href="#spotify">聴く</a><a href="#note">短く書く</a><a href="#offprint">長く書く</a><a href="#bluesky">日々の投稿</a></nav>
+    <section class="wrap" id="games" aria-labelledby="featured-heading">
+      <div class="section-head"><h2 id="featured-heading">まず、ひとつ</h2><span>FEATURED GAME</span></div>
+      <article class="featured-work">
+        <a class="featured-media" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer"><img src="/assets/game-1999.png" alt="『1999』のキービジュアル" width="973" height="615" decoding="async"><span class="featured-tag">PLAY IN BROWSER · ABOUT 15 MIN</span></a>
+        <div class="featured-copy"><div><span class="index">01 / GAME</span><h3>1999</h3><p>1999年7月。終わらない夏休みに閉じ込められた、二人の女の子の物語。</p></div><div class="featured-actions"><a href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">『1999』を遊ぶ</a><a href="/works/">制作物一覧</a></div></div>
+      </article>
+    </section>
     <section class="wrap" aria-labelledby="links-heading">
-      <div class="section-head"><h2 id="links-heading">Links &amp; works</h2><span>01—05 / SELECT</span></div>
+      <div class="section-head"><h2 id="links-heading">書く、話す、日々</h2><span>LISTEN · READ · FOLLOW</span></div>
       <div class="links">
-        <article class="card bluesky-card" id="bluesky"><div class="card-top"><span class="index">01 / SOCIAL</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>Bluesky</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">最近の投稿を取得しています。表示されない場合はプロフィールをご覧ください。</p></div></div></article>
-        <article class="card" id="spotify"><div class="card-top"><span class="index">02 / LISTEN</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋でゲームについて話します。</p></div><div class="card-actions"><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">Spotifyで聴く</a><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer"><img class="latest-image" src="/assets/spotify-latest.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><span class="latest-copy">最新 / #169 キャッスルヴァニア 暁月の円舞曲で薄暗</span></a></div></article>
-        <article class="card" id="note"><div class="card-top"><span class="index">03 / READ</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>note</h3><p>ゲームの感想や、日々考えたこと。</p></div><div class="card-actions"><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">noteの記事一覧</a><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer"><img class="latest-image" src="/assets/note-latest.jpg" alt="" width="720" height="377" loading="lazy" decoding="async"><span class="latest-copy">最新 / カリギュラ2の文章を書いたのでリンクを張るための記事</span></a></div></article>
-        <article class="card" id="offprint"><div class="card-top"><span class="index">04 / ESSAYS</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>Offprint</h3><p>ゲームについての、少し長めの文章。</p></div><div class="card-actions"><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">Offprintの記事一覧</a><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer"><img class="latest-image" src="/assets/offprint-latest.jpg" alt="" width="720" height="378" loading="lazy" decoding="async"><span class="latest-copy">最新 / 解決不可能な問い: 茉莉絵はどうすれば幸福に至れるか？</span></a></div></article>
-        <a class="card" id="games" href="/works/"><div class="card-top"><span class="index">05 / PLAY</span><span class="glyph" aria-hidden="true">＋</span></div><div><h3>つくったゲーム</h3><p>『1999』—終わらない1999年7月の夏休み。ブラウザで約15分。次の作品も制作中です。</p></div><div class="meta">1999 / Works</div></a>
+        <article class="card" id="spotify"><div class="card-top"><span class="index">02 / TALK · SPOTIFY</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋で、ゲームについて話します。</p></div><div class="card-actions"><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/spotify-latest.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><span class="latest-label">Latest episode</span></span><span class="latest-copy"><span class="latest-date">2026.10.07</span><span class="latest-title">#169 キャッスルヴァニア 暁月の円舞曲で薄暗</span></span></a><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組をSpotifyで聴く →</a></div></article>
+        <article class="card" id="note"><div class="card-top"><span class="index">03 / WRITE · NOTE</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>ゲームの感想と、<br>考えたこと</h3><p>短い文章や、更新のお知らせ。</p></div><div class="card-actions"><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/note-latest.jpg" alt="" width="720" height="377" loading="lazy" decoding="async"><span class="latest-label">Latest note</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">カリギュラ2の文章を書いたのでリンクを張るための記事</span><span class="latest-summary">カリギュラ2に向き合い、Offprintに書いた文章への入口。</span></span></a><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">noteの記事一覧 →</a></div></article>
+        <article class="card" id="offprint"><div class="card-top"><span class="index">04 / WRITE · OFFPRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>ゲームについて、<br>長く書く</h3><p>考え続けたいことを、少し長めの文章に。</p></div><div class="card-actions"><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/offprint-latest.jpg" alt="" width="720" height="378" loading="lazy" decoding="async"><span class="latest-label">Latest essay</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">解決不可能な問い：茉莉絵はどうすれば幸福に至れるか？</span><span class="latest-summary">『カリギュラ2』の茉莉絵が幸福に至る道を考える。</span></span></a><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">Offprintの記事一覧 →</a></div></article>
+        <article class="card bluesky-card" id="bluesky"><div class="card-top"><span class="index">05 / RECENT · BLUESKY</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>最近の砂</h3><p>日々のこと、ゲームの話、更新のお知らせ。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer">@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">最近の投稿を取得しています。表示されない場合はプロフィールをご覧ください。</p></div></div></article>
       </div>
     </section>
-    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span><span>WRITE ✦ TALK ✦ PLAY ✦ MAKE ✦ THINK ✦ </span></div></div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>書く ✦ 話す ✦ つくる ✦ 遊ぶ ✦ 考える ✦ </span><span>書く ✦ 話す ✦ つくる ✦ 遊ぶ ✦ 考える ✦ </span><span>書く ✦ 話す ✦ つくる ✦ 遊ぶ ✦ 考える ✦ </span><span>書く ✦ 話す ✦ つくる ✦ 遊ぶ ✦ 考える ✦ </span></div></div>
   </main>
-  <footer class="wrap"><div><p>このページは、インターネット上の活動をひとつの入口にまとめた索引です。</p><p class="copyright">© 2026 砂</p></div><div class="mark" aria-hidden="true">※</div></footer>
+  <footer class="wrap"><div><p>日々の話と更新のお知らせは、Blueskyにいます。</p><p class="copyright">この砂場には5つの姿があります。6時間ごとに、また抽選。<br>© 2026 砂</p></div><div class="mark" aria-hidden="true">※</div></footer>
   <script>
     const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', candy:'edition 04 / pop', terminal:'edition 05 / terminal' };
     const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', candy:'#ffd8ed', terminal:'#071009' };
@@ -340,7 +387,7 @@
       })
       .then((data) => {
         const items = Array.isArray(data.feed)
-          ? data.feed.filter((item) => !item.reason && item.post?.author?.handle === 'sandriver.bsky.social').slice(0, 3)
+          ? data.feed.filter((item) => !item.reason && item.post?.author?.handle === 'sandriver.bsky.social').slice(0, 2)
           : [];
         if (!items.length) throw new Error('Bluesky feed is empty');
         renderFeed(items);
