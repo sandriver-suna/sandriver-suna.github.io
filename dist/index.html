@@ -8,7 +8,7 @@
   <title>砂の砂場</title>
   <script>
     (() => {
-      const styles = ['zine', 'midnight', 'shizuka', 'candy', 'terminal'];
+      const styles = ['zine', 'midnight', 'shizuka', 'terminal'];
       const cookieName = 'sand_style';
       let saved;
       try { saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '=')); }
@@ -206,28 +206,6 @@
     html[data-style="shizuka"] .ticker { color:var(--bg); background:var(--fg); }
 
     /* 04 — toy-box pop */
-    html[data-style="candy"] { --bg:#ffd8ed; --fg:#31144a; --muted:#6c477d; --accent:#ff5a36; --accent-2:#fff16a; --accent-3:#66e6e2; --card:#fffdf6; --rule:rgba(49,20,74,.22); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
-    html[data-style="candy"] body { background:radial-gradient(circle,rgba(49,20,74,.12) 2px,transparent 2.5px) 0 0/28px 28px,var(--bg); }
-    html[data-style="candy"] .site-header { border:0; }
-    html[data-style="candy"] .signature, html[data-style="candy"] .edition { padding:9px 15px; background:var(--accent-2); border:2px solid var(--fg); border-radius:999px; box-shadow:3px 3px 0 var(--fg); }
-    html[data-style="candy"] .hero { min-height:580px; align-items:center; border:0; }
-    html[data-style="candy"] h1 { font-size:clamp(4.6rem,12vw,10rem); text-shadow:5px 5px 0 #fff,10px 10px 0 var(--accent-3); transform:rotate(-2deg); }
-    html[data-style="candy"] .title-top { display:inline; font-size:.34em; margin-right:.15em; }
-    html[data-style="candy"] .title-main { display:inline; }
-    html[data-style="candy"] .hero-note { background:var(--accent); color:var(--fg); border:3px solid var(--fg); border-radius:50% 46% 44% 52%; transform:rotate(7deg); box-shadow:7px 7px 0 var(--fg); }
-    html[data-style="candy"] .section-head span { padding:7px 12px; background:var(--accent-3); border:2px solid var(--fg); border-radius:999px; }
-    html[data-style="candy"] .featured-work { border:3px solid var(--fg); border-radius:34px; background:var(--accent-2); box-shadow:8px 8px 0 var(--fg); }
-    html[data-style="candy"] .featured-media { border-radius:30px 0 0 30px; }
-    html[data-style="candy"] .featured-work:hover { box-shadow:12px 14px 0 var(--fg); }
-    html[data-style="candy"] .links { gap:22px; }
-    html[data-style="candy"] .card { min-height:255px; border:3px solid var(--fg); border-radius:28px; box-shadow:6px 6px 0 var(--fg); }
-    html[data-style="candy"] #spotify { background:var(--accent-3); }
-    html[data-style="candy"] #note { background:var(--accent-2); }
-    html[data-style="candy"] #offprint { background:#c9b4ff; }
-    html[data-style="candy"] #bluesky { background:#ff9d75; }
-    html[data-style="candy"] .card:hover, html[data-style="candy"] .card:focus-within { z-index:2; outline:0; box-shadow:10px 14px 0 var(--fg); }
-    html[data-style="candy"] .glyph { background:white; border-width:2px; }
-    html[data-style="candy"] .ticker { color:var(--bg); background:var(--fg); border-block:3px solid var(--fg); transform:rotate(-1deg); }
 
     /* 05 — green-screen terminal */
     html[data-style="terminal"] { --bg:#071009; --fg:#82ff8c; --muted:#4cad54; --accent:#d4ff63; --accent-2:#82ff8c; --accent-3:#82ff8c; --card:#071009; --rule:rgba(130,255,140,.42); --sans:"DM Mono",monospace; --display:"DotGothic16",monospace; --mono:"DM Mono",monospace; --wrap:min(980px,calc(100% - 36px)); }
@@ -282,7 +260,6 @@
       .featured-media { min-height:0; aspect-ratio:973/615; }
       .featured-copy { padding:24px; }
       .featured-copy h3 { font-size:clamp(3.8rem,18vw,6rem); }
-      html[data-style="candy"] .featured-media { border-radius:30px 30px 0 0; }
       .links { gap:12px; padding-bottom:50px; }
       .media-group-cards { gap:12px; padding-top:12px; }
       .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
@@ -298,10 +275,6 @@
       html[data-style="shizuka"] .hero-note small { display:none; }
       html[data-style="shizuka"] .card { min-height:190px; grid-template-columns:1fr; gap:14px; padding:24px 0; }
       html[data-style="shizuka"] .card-actions { grid-column:1; }
-      html[data-style="candy"] .signature { max-width:58%; white-space:nowrap; overflow:hidden; }
-      html[data-style="candy"] .hero { min-height:520px; }
-      html[data-style="candy"] h1 { font-size:clamp(4rem,21vw,7rem); }
-      html[data-style="candy"] .hero-note { max-width:72%; }
       html[data-style="terminal"] .hero { min-height:430px; }
       html[data-style="terminal"] .card { min-height:0; grid-template-columns:1fr; gap:14px; padding:22px 0; }
       html[data-style="terminal"] .meta { grid-column:1; text-align:left; }
@@ -334,8 +307,8 @@
   </main>
   <footer class="wrap"><div><p class="copyright">© 2026 砂</p></div></footer>
   <script>
-    const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', candy:'edition 04 / pop', terminal:'edition 05 / terminal' };
-    const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', candy:'#ffd8ed', terminal:'#071009' };
+    const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', terminal:'edition 04 / terminal' };
+    const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', terminal:'#071009' };
     const style = window.__sandStyle || 'zine';
     document.querySelector('#edition-name').textContent = names[style];
     document.querySelector('meta[name="theme-color"]').setAttribute('content', colors[style]);
