@@ -64,10 +64,16 @@ note を「短く書く」とは扱わないこと。短文は Bluesky、長文�
 4. ランダムスタイルの Cookie が 6 時間、`Secure`、`SameSite=Lax` になっているか確認する。
 5. サイトは公開・ログイン不要であることを維持する。ただし、公開前に不要な秘密情報を置いていないか確認する。
 
+## 公開方法
+
+- 更新は GitHub リポジトリ `sandriver-suna/sandriver-suna.github.io` に push して反映する。
+- ChatGPT Sites には今後公開しない。ChatGPT Sites 用の保存・デプロイ操作も行わない。
+- 公開先を変更する場合は、この項目と公開 URL を先に更新する。
+
 ## 現在の構成
 
 - ホーム: ヒーロー → 長文（Offprint、note）と音声（ポッドキャスト）を続けて配置 → 短文（Bluesky） → 制作物（『1999』）。分類上のまとまりに番号などの仮名は表示しない。
 - 制作物ページ: 『1999』と、次のゲームの予告。
-- 公開 URL: https://my-links-studio-1008.yuki0412.chatgpt.site/
+- 公開 URL: https://sandriver-suna.github.io/
 
 最終更新: 2026-10-09
