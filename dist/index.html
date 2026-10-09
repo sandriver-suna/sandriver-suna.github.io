@@ -284,6 +284,8 @@
       .links { gap:12px; padding-bottom:50px; }
       .media-group-cards { gap:12px; padding-top:12px; }
       .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
+      #note .latest-media, #offprint .latest-media { display:block; min-height:220px; }
+      #note .latest-image, #offprint .latest-image { display:block; }
       footer { grid-template-columns:1fr; }
       footer .mark { justify-self:end; }
       html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
@@ -326,7 +328,7 @@
       </div>
     </section>
   </main>
-  <footer class="wrap"><div><p class="copyright">© 2026 砂</p></div><div class="mark" aria-hidden="true">※</div></footer>
+  <footer class="wrap"><div><p class="copyright">© 2026 砂</p></div></footer>
   <script>
     const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', candy:'edition 04 / pop', terminal:'edition 05 / terminal' };
     const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', candy:'#ffd8ed', terminal:'#071009' };
