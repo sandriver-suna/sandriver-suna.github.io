@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ja" data-style="zine">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="砂の文章、ポッドキャスト、ゲームをまとめたリンク集。">
+  <meta name="theme-color" content="#f2efdf">
+  <title>砂の砂場</title>
+  <script>
+    (() => {
+      const styles = ['zine', 'midnight', 'shizuka', 'terminal'];
+      const cookieName = 'sand_style';
+      let saved;
+      try { saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '=')); }
+      catch (_) { saved = undefined; }
+      let style = saved ? saved.split('=').slice(1).join('=') : '';
+      if (!styles.includes(style)) {
+        let index;
+        try {
+          const value = new Uint32Array(1);
+          crypto.getRandomValues(value);
+          index = value[0] % styles.length;
+        } catch (_) {
+          index = Math.floor(Math.random() * styles.length);
+        }
+        style = styles[index];
+        try { document.cookie = cookieName + '=' + style + '; Max-Age=21600; Path=/; SameSite=Lax; Secure'; }
+        catch (_) { /* The page can still use the selected style for this visit. */ }
+      }
+      document.documentElement.dataset.style = style;
+      window.__sandStyle = style;
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DotGothic16&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Shippori+Mincho:wght@400;600;700&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23202a22'/%3E%3Cpath d='M18 20h28v6H18zm0 12h20v6H18zm0 12h12v6H18z' fill='%23f2efdf'/%3E%3Ccircle cx='46' cy='44' r='6' fill='%23ff4f34'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f2efdf; --fg: #202a22; --muted: #596159; --accent: #ff4f34;
+      --accent-2: #f5c945; --accent-3: #9bd5e6; --card: #fff; --rule: rgba(32,42,34,.22);
+      --sans: "Noto Sans JP", system-ui, sans-serif; --display: "Noto Sans JP", system-ui, sans-serif;
+      --mono: "DM Mono", monospace; --wrap: min(1180px, calc(100% - 40px));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; color: var(--fg); background: var(--bg); font-family: var(--sans); font-size: 16px; line-height: 1.7; transition: color .2s, background .2s; }
+    a { color: inherit; }
+    .wrap { width: var(--wrap); margin-inline: auto; }
+    .site-header { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--rule); }
+    .signature { font-family: var(--mono); font-weight: 500; letter-spacing: -.04em; text-decoration: none; }
+    .edition { font: 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .hero { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: end; padding: 74px 0 58px; border-bottom: 1px solid var(--rule); }
+    .eyebrow { margin: 0 0 22px; font: 13px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-family: var(--display); font-size: clamp(4rem,10vw,9.6rem); font-weight: 900; line-height: .86; letter-spacing: -.095em; }
+    h1 span { display: block; }
+    .hero-note { justify-self: end; max-width: 265px; padding: 22px; font-weight: 700; }
+    .hero-note p { margin: 0; }
+    .hero-note small { display: block; margin-top: 18px; font: 12px/1.4 var(--mono); text-transform: uppercase; }
+    .role-line { max-width:34rem; margin:28px 0 0; font-weight:700; }
+    .quick-nav { display:grid; grid-template-columns:repeat(5,1fr); border-bottom:1px solid var(--rule); }
+    .quick-nav a { min-width:0; padding:15px 10px; border-right:1px solid var(--rule); font:12px/1.4 var(--mono); text-align:center; text-decoration:none; }
+    .quick-nav a:first-child { border-left:1px solid var(--rule); }
+    .quick-nav a:hover { background:var(--card); }
+    .quick-nav a:focus-visible { position:relative; z-index:2; outline:3px solid currentColor; outline-offset:-3px; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 44px 0 20px; }
+    h2 { margin: 0; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: -.055em; }
+    .section-head span { font: 13px/1.2 var(--mono); }
+    .featured-work { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr); min-height:440px; overflow:hidden; color:var(--fg); background:var(--card); border:2px solid currentColor; transition:transform .22s ease,box-shadow .22s ease; }
+    .featured-media { position:relative; min-height:440px; overflow:hidden; background:#111; }
+    a.featured-media { display:block; color:inherit; }
+    .featured-media img { width:100%; height:100%; display:block; object-fit:cover; transition:transform .55s cubic-bezier(.2,.8,.2,1); }
+    .featured-tag { position:absolute; left:18px; bottom:18px; padding:7px 10px; color:#fff; background:#111; font:12px/1.2 var(--mono); letter-spacing:.05em; }
+    .featured-copy { display:flex; flex-direction:column; justify-content:space-between; gap:28px; padding:34px; }
+    .featured-copy h3 { margin:0; font:900 clamp(4rem,8vw,7rem)/.85 var(--display); letter-spacing:-.08em; }
+    .featured-copy p { max-width:26rem; margin:18px 0 0; font-weight:700; }
+    .featured-actions { display:grid; gap:8px; padding-top:18px; border-top:1px solid currentColor; }
+    .featured-actions a { min-height:44px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:10px 12px; border:1px solid currentColor; font:13px/1.4 var(--mono); text-decoration:none; }
+    .featured-actions a::after { content:"→"; font-size:1.2rem; }
+    .featured-actions a:first-child { color:var(--bg); background:var(--fg); }
+    .featured-actions a:hover { opacity:.76; }
+    .featured-actions a:focus-visible, a.featured-media:focus-visible { outline:4px solid currentColor; outline-offset:-4px; }
+    .featured-work:hover .featured-media img { transform:scale(1.035); }
+    .links { display: grid; grid-template-columns: repeat(12,1fr); gap: 18px; padding-bottom: 74px; }
+    .media-group { grid-column: 1 / -1; }
+    .media-group + .media-group { margin-top: 18px; }
+    .media-cluster { grid-column:1 / -1; display:grid; gap:18px; }
+    .media-cluster .media-group + .media-group { margin-top:0; }
+    .media-group-head { display:flex; align-items:baseline; justify-content:space-between; gap:20px; padding:12px 0; border-bottom:1px solid var(--rule); }
+    .media-group-head { display:flex; }
+    .media-group-head h3 { margin:0; font:700 clamp(1.15rem,2vw,1.5rem)/1.25 var(--display); letter-spacing:-.04em; }
+    .media-group-head span { font:12px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+    .media-group-cards { display:grid; grid-template-columns:repeat(12,1fr); gap:18px; padding-top:18px; }
+    .media-group-cards .card { grid-column:span 12; }
+    .media-group-cards .featured-work { grid-column:1 / -1; }
+    .card { position: relative; grid-column: span 6; min-height: 238px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 24px; color: var(--fg); background: var(--card); text-decoration: none; transition: box-shadow .22s ease, color .2s, background .2s; }
+    .card-top { display: flex; justify-content: space-between; gap: 24px; }
+    .index { font: 13px/1.2 var(--mono); }
+    .glyph { width: 46px; height: 46px; display: grid; place-items: center; border: 1.5px solid currentColor; border-radius: 50%; font: 18px/1 var(--mono); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+    .card:focus-within .glyph, .card:hover .glyph { transform: rotate(14deg) scale(1.08); }
+    .card h3 { margin: 22px 0 8px; font-family: var(--display); font-size: clamp(1.65rem,3vw,2.7rem); line-height: 1.05; letter-spacing: -.06em; }
+    .card p { max-width: 37ch; margin: 0; opacity: .74; font-size: .94rem; }
+    .card p { display:none; }
+    .featured-copy p { display:block; }
+    .meta { margin-top: 24px; font: 12px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .card-actions { display:grid; gap:8px; margin-top:24px; }
+    .card-actions a { display:flex; min-height:44px; align-items:center; padding:10px 12px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
+    .card-actions a.latest { display:grid; grid-template-columns:1fr; align-items:stretch; overflow:hidden; padding:0; border-style:dashed; }
+    .latest-media { position:relative; aspect-ratio:16/9; overflow:hidden; border-bottom:1px dashed currentColor; background:rgba(0,0,0,.08); }
+    .latest-image { width:100%; height:100%; display:block; object-fit:cover; transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+    .latest-label { position:absolute; top:10px; left:10px; padding:5px 8px; color:var(--bg); background:var(--fg); font:10px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+    .latest-copy { display:grid; gap:5px; align-self:center; padding:13px 14px 15px; }
+    .latest-date { font:11px/1.3 var(--mono); opacity:.68; }
+    .latest-title { font:700 1.15rem/1.5 var(--sans); letter-spacing:0; }
+    #note h3, #offprint h3 { font-size:clamp(1.45rem,2.2vw,2rem); line-height:1.18; }
+    #spotify .latest-media { background:var(--bg); }
+    #spotify .latest-image { object-fit:contain; padding:12px; }
+    .card-actions a:hover { opacity:.78; }
+    .card-actions a.latest:hover .latest-image { transform:scale(1.035); }
+    .card-actions a:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
+    .bsky-card-body { display:grid; gap:16px; }
+    .card > *, .bsky-card-body, .card-actions, .latest-copy { min-width:0; }
+    .bsky-profile { width:max-content; max-width:100%; display:inline-flex; align-items:center; gap:8px; padding:8px 11px; border:1px solid currentColor; font:12px/1.45 var(--mono); letter-spacing:.02em; text-decoration:none; }
+    .bsky-avatar { width:28px; height:28px; flex:0 0 28px; border-radius:50%; object-fit:cover; background:currentColor; }
+    .bsky-profile { overflow-wrap:anywhere; }
+    .bsky-profile:hover { opacity:.68; }
+    .bsky-profile:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
+    .bsky-feed { display:grid; align-content:start; gap:8px; }
+    .bsky-status { padding:11px; border:1px dashed currentColor; font:12px/1.5 var(--mono); }
+    .bsky-post { display:block; padding:11px; border:1px dashed currentColor; color:inherit; text-decoration:none; transition:opacity .18s ease, background .18s ease; }
+    .bsky-post:hover { opacity:.72; }
+    .bsky-post:focus-visible { outline:3px solid currentColor; outline-offset:2px; }
+    .bsky-post-text { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:3; margin:0; font-size:.84rem; line-height:1.55; white-space:pre-wrap; }
+    .bsky-post-text, .bsky-status { display:block; }
+    .bsky-post-meta { display:flex; justify-content:space-between; gap:12px; margin-top:8px; font:11px/1.35 var(--mono); letter-spacing:.03em; opacity:.72; }
+    .ticker { overflow: hidden; }
+    .ticker-track { width: max-content; display: flex; padding: 10px 0; animation: ticker 26s linear infinite; }
+    .ticker-track span { padding-right: 34px; font: 13px/1 var(--mono); text-transform: uppercase; }
+    footer { min-height: 220px; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end; padding: 48px 0; }
+    footer p { max-width: 34ch; margin: 0; }
+    footer .mark { font-size: clamp(4rem,9vw,8rem); font-weight: 900; line-height: .72; letter-spacing: -.1em; }
+    .copyright { margin-top: 14px; color: var(--muted); font-size: .86rem; }
+
+    /* 01 — cut-and-paste zine */
+    html[data-style="zine"] body { background: radial-gradient(circle at 15% 10%,rgba(245,201,69,.22),transparent 24rem), linear-gradient(rgba(32,42,34,.035) 1px,transparent 1px), linear-gradient(90deg,rgba(32,42,34,.035) 1px,transparent 1px), var(--bg); background-size: auto,24px 24px,24px 24px,auto; }
+    html[data-style="zine"] .title-top { font-size: .34em; letter-spacing: -.03em; margin: 0 0 .26em .08em; }
+    html[data-style="zine"] .title-main { color: transparent; -webkit-text-stroke: 2px var(--fg); }
+    html[data-style="zine"] .hero-note { background: var(--accent-2); border: 2px solid var(--fg); transform: rotate(2.2deg); box-shadow: 8px 8px 0 var(--fg); }
+    html[data-style="zine"] .featured-work { background:var(--accent-2); box-shadow:10px 10px 0 var(--fg); }
+    html[data-style="zine"] .featured-work:hover { transform:translate(-4px,-4px); box-shadow:14px 14px 0 var(--fg); }
+    html[data-style="zine"] .card { border: 2px solid var(--fg); }
+    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-within { z-index: 2; outline: 0; box-shadow: 7px 7px 0 var(--fg); }
+    html[data-style="zine"] #spotify { color: var(--bg); background: var(--fg); }
+    html[data-style="zine"] #note { background: var(--accent-3); }
+    html[data-style="zine"] #offprint { background: var(--accent-2); }
+    html[data-style="zine"] #bluesky { background: var(--accent); }
+    html[data-style="zine"] .ticker { color: var(--bg); background: var(--fg); border-block: 2px solid var(--fg); }
+
+    /* 02 — midnight broadcast */
+    html[data-style="midnight"] { --bg:#080b1b; --fg:#f6f4ff; --muted:#9ea5c9; --accent:#ff3ea5; --accent-2:#b9ff39; --accent-3:#51d9ff; --card:#11162e; --rule:rgba(142,229,255,.24); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
+    html[data-style="midnight"] body { background: linear-gradient(120deg,rgba(255,62,165,.12),transparent 35%), radial-gradient(circle at 85% 20%,rgba(81,217,255,.18),transparent 30rem), #080b1b; }
+    html[data-style="midnight"] body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:10; background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.018) 3px 4px); }
+    html[data-style="midnight"] .site-header, html[data-style="midnight"] .hero { border-color:var(--accent-3); }
+    html[data-style="midnight"] .edition { color:var(--accent-2); text-shadow:0 0 16px rgba(185,255,57,.65); }
+    html[data-style="midnight"] .hero { min-height:65vh; align-items:center; }
+    html[data-style="midnight"] h1 { letter-spacing:-.07em; text-transform:uppercase; text-shadow:5px 5px 0 rgba(255,62,165,.6),-4px -4px 0 rgba(81,217,255,.35); }
+    html[data-style="midnight"] .title-top { font-size:.4em; color:var(--accent-3); letter-spacing:.02em; }
+    html[data-style="midnight"] .hero-note { color:var(--bg); background:var(--accent-2); border-radius:999px 999px 12px 999px; transform:rotate(-3deg); box-shadow:0 0 40px rgba(185,255,57,.25); }
+    html[data-style="midnight"] .featured-work { border:1px solid var(--accent-3); background:linear-gradient(145deg,#161c3b,#0d1125); box-shadow:0 0 45px rgba(81,217,255,.12); }
+    html[data-style="midnight"] .featured-tag { color:var(--bg); background:var(--accent-2); }
+    html[data-style="midnight"] .featured-work:hover { box-shadow:0 20px 65px rgba(0,0,0,.55),0 0 35px rgba(81,217,255,.2); }
+    html[data-style="midnight"] .links { gap:10px; }
+    html[data-style="midnight"] .card { min-height:260px; border:1px solid var(--rule); border-radius:3px; background:linear-gradient(150deg,#161c3b,#0d1125); }
+    html[data-style="midnight"] .card::after { content:""; position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent-3)); transform:scaleX(0); transform-origin:left; transition:transform .25s; }
+    html[data-style="midnight"] .card:hover::after, html[data-style="midnight"] .card:focus-visible::after { transform:scaleX(1); }
+    html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-within { outline:0; box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
+    html[data-style="midnight"] .glyph { color:var(--accent-3); border-color:var(--accent-3); box-shadow:inset 0 0 16px rgba(81,217,255,.15); }
+    html[data-style="midnight"] .ticker { color:var(--bg); background:var(--accent-3); }
+
+    /* 03 — quiet Japanese editorial */
+    html[data-style="shizuka"] { --bg:#fbfbf9; --fg:#171717; --muted:#77736d; --accent:#9e241e; --accent-2:#ded9cf; --accent-3:#dfe7e2; --card:transparent; --rule:rgba(23,23,23,.2); --sans:"Shippori Mincho",serif; --display:"Shippori Mincho",serif; --wrap:min(1040px,calc(100% - 64px)); }
+    html[data-style="shizuka"] .site-header { min-height:96px; }
+    html[data-style="shizuka"] .signature { font-family:var(--display); letter-spacing:.14em; }
+    html[data-style="shizuka"] .edition { color:var(--muted); }
+    html[data-style="shizuka"] .hero { min-height:620px; grid-template-columns:1fr 180px; align-items:center; padding:80px 0; }
+    html[data-style="shizuka"] .eyebrow { letter-spacing:.22em; }
+    html[data-style="shizuka"] h1 { font-size:clamp(5rem,12vw,9rem); font-weight:600; letter-spacing:.02em; line-height:1.12; }
+    html[data-style="shizuka"] .title-top { font-size:.4em; margin-left:3.1em; }
+    html[data-style="shizuka"] .hero-note { align-self:stretch; max-width:none; padding:28px 22px; border-left:1px solid var(--fg); writing-mode:vertical-rl; letter-spacing:.12em; font-weight:400; }
+    html[data-style="shizuka"] .hero-note small { margin:0 18px 0 0; }
+    html[data-style="shizuka"] .section-head { padding-top:70px; }
+    html[data-style="shizuka"] h2 { font-family:var(--display); font-weight:600; letter-spacing:.06em; }
+    html[data-style="shizuka"] .featured-work { grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr); border-width:1px 0; }
+    html[data-style="shizuka"] .featured-copy h3 { font-weight:600; letter-spacing:.04em; }
+    html[data-style="shizuka"] .links { display:block; }
+    html[data-style="shizuka"] .media-group + .media-group { margin-top:34px; }
+    html[data-style="shizuka"] .media-group-head { padding:16px 0; }
+    html[data-style="shizuka"] .media-group-cards { display:block; padding-top:0; }
+    html[data-style="shizuka"] .card { min-height:176px; display:grid; grid-template-columns:170px 1fr; gap:32px; align-items:center; padding:28px 0; border-top:1px solid var(--rule); }
+    html[data-style="shizuka"] .card:last-child { border-bottom:1px solid var(--rule); }
+    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-within { outline:0; color:var(--accent); }
+    html[data-style="shizuka"] .card-top { align-self:start; }
+    html[data-style="shizuka"] .card h3 { margin-top:0; font-size:clamp(1.8rem,4vw,3.3rem); font-weight:600; letter-spacing:.02em; }
+    html[data-style="shizuka"] .glyph { width:34px; height:34px; font-size:13px; }
+    html[data-style="shizuka"] .meta { color:var(--muted); }
+    html[data-style="shizuka"] .card-actions { grid-column:2; margin-top:0; }
+    html[data-style="shizuka"] .ticker { color:var(--bg); background:var(--fg); }
+
+    /* 04 — toy-box pop */
+
+    /* 05 — green-screen terminal */
+    html[data-style="terminal"] { --bg:#071009; --fg:#82ff8c; --muted:#4cad54; --accent:#d4ff63; --accent-2:#82ff8c; --accent-3:#82ff8c; --card:#071009; --rule:rgba(130,255,140,.42); --sans:"DM Mono",monospace; --display:"DotGothic16",monospace; --mono:"DM Mono",monospace; --wrap:min(980px,calc(100% - 36px)); }
+    html[data-style="terminal"] body { background:linear-gradient(rgba(130,255,140,.025) 50%,transparent 50%) 0 0/100% 4px,var(--bg); text-shadow:0 0 8px rgba(130,255,140,.22); }
+    html[data-style="terminal"] .site-header { min-height:68px; border-style:dashed; text-transform:uppercase; }
+    html[data-style="terminal"] .signature::before { content:"> "; }
+    html[data-style="terminal"] .edition::before { content:"session: "; color:var(--muted); }
+    html[data-style="terminal"] .hero { min-height:500px; grid-template-columns:1fr; align-items:center; padding:80px 0; border-style:dashed; }
+    html[data-style="terminal"] .eyebrow::before { content:"/* "; }
+    html[data-style="terminal"] .eyebrow::after { content:" */"; }
+    html[data-style="terminal"] h1 { font-size:clamp(4.3rem,13vw,9rem); font-weight:400; letter-spacing:.02em; line-height:1; }
+    html[data-style="terminal"] .title-top { font-size:.34em; }
+    html[data-style="terminal"] .title-main::after { content:"_"; animation:cursor 1s step-end infinite; }
+    html[data-style="terminal"] .hero-note { justify-self:start; max-width:620px; padding:18px; border:1px dashed var(--fg); font-weight:400; }
+    html[data-style="terminal"] .hero-note::before { content:"$ whoami\A"; white-space:pre; color:var(--accent); }
+    html[data-style="terminal"] .section-head { border-bottom:1px dashed var(--rule); }
+    html[data-style="terminal"] h2 { font-family:var(--display); font-weight:400; }
+    html[data-style="terminal"] h2::before { content:"./"; }
+    html[data-style="terminal"] .featured-work { grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr); border:1px dashed var(--fg); }
+    html[data-style="terminal"] .featured-copy h3 { font-weight:400; letter-spacing:0; }
+    html[data-style="terminal"] .featured-tag { color:var(--bg); background:var(--fg); }
+    html[data-style="terminal"] .links { display:block; }
+    html[data-style="terminal"] .media-group + .media-group { margin-top:28px; }
+    html[data-style="terminal"] .media-group-head { border-bottom-style:dashed; }
+    html[data-style="terminal"] .media-group-cards { display:block; padding-top:0; }
+    html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px minmax(0,1fr) minmax(260px,.78fr); gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
+    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-within { outline:0; box-shadow:inset 4px 0 0 var(--fg); }
+    html[data-style="terminal"] .card-top { display:block; }
+    html[data-style="terminal"] .glyph { width:34px; height:34px; margin-top:10px; border-radius:0; }
+    html[data-style="terminal"] .card h3 { margin:0 0 7px; font-size:clamp(1.6rem,4vw,2.7rem); font-weight:400; letter-spacing:0; }
+    html[data-style="terminal"] .meta { margin:0; text-align:right; }
+    html[data-style="terminal"] .card-actions { margin:0; }
+    html[data-style="terminal"] .ticker { color:var(--bg); background:var(--fg); text-shadow:none; }
+    html[data-style="terminal"] footer .mark { font-family:var(--display); font-weight:400; }
+
+    @keyframes ticker { to { transform:translateX(-50%); } }
+    @keyframes cursor { 50% { opacity:0; } }
+    @media (max-width:760px) {
+      :root { --wrap:min(100% - 24px,680px); }
+      .site-header { min-height:66px; }
+      .edition { font-size:10px; }
+      .hero { min-height:0; grid-template-columns:1fr; gap:34px; padding:52px 0 46px; }
+      h1 { font-size:clamp(3.8rem,19vw,7rem); }
+      .hero-note { justify-self:start; max-width:82%; }
+      .role-line { margin-top:22px; }
+      .quick-nav { grid-template-columns:repeat(2,1fr); }
+      .quick-nav a:nth-child(odd) { border-left:1px solid var(--rule); }
+      .quick-nav a { border-top:1px solid var(--rule); }
+      .quick-nav a:last-child { grid-column:span 2; }
+      .section-head { padding-top:34px; }
+      .featured-work, html[data-style="shizuka"] .featured-work, html[data-style="terminal"] .featured-work { grid-template-columns:1fr; min-height:0; }
+      .featured-media { min-height:0; aspect-ratio:973/615; }
+      .featured-copy { padding:24px; }
+      .featured-copy h3 { font-size:clamp(3.8rem,18vw,6rem); }
+      .links { gap:12px; padding-bottom:50px; }
+      .media-group-cards { gap:12px; padding-top:12px; }
+      .card, html[data-style] .card:nth-child(n) { grid-column:span 12; min-height:205px; }
+      #note .latest-media, #offprint .latest-media { display:block; min-height:220px; }
+      #note .latest-image, #offprint .latest-image { display:block; }
+      .card-actions, .card-actions a.latest, .latest-media { width:100%; max-width:100%; min-width:0; }
+      .latest-image { max-width:100%; }
+      footer { grid-template-columns:1fr; }
+      footer .mark { justify-self:end; }
+      html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
+      html[data-style="shizuka"] .hero { min-height:430px; grid-template-columns:1fr 74px; padding:48px 0; }
+      html[data-style="shizuka"] .hero-note { max-width:none; padding:16px 10px; font-size:.88rem; }
+      html[data-style="shizuka"] .hero-note small { display:none; }
+      html[data-style="shizuka"] .card { min-height:190px; grid-template-columns:1fr; gap:14px; padding:24px 0; }
+      html[data-style="shizuka"] .card-actions { grid-column:1; }
+      html[data-style="terminal"] .hero { min-height:430px; }
+      html[data-style="terminal"] .card { min-height:0; grid-template-columns:1fr; gap:14px; padding:22px 0; }
+      html[data-style="terminal"] .meta { grid-column:1; text-align:left; }
+      html[data-style="terminal"] .card-actions { grid-column:1; }
+      html[data-style] .hero { min-height:0; padding-top:40px; padding-bottom:38px; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+  </style>
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="signature" href="#top">砂の砂場 / INDEX</a>
+    <span class="edition" id="edition-name">random edition</span>
+  </header>
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="page-title">
+      <div><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1></div>
+    </section>
+    <nav class="quick-nav wrap" aria-label="活動へのショートカット"><a href="#longform">長文</a><a href="#audio">音声</a><a href="#short-posts">短文</a><a href="#works">制作物</a></nav>
+    <section class="wrap" aria-labelledby="links-heading">
+      <div class="links">
+        <div class="media-cluster">
+          <section class="media-group" id="longform" aria-labelledby="longform-heading"><div class="media-group-head"><h3 id="longform-heading">長文</h3><span>LONGFORM</span></div><div class="media-group-cards"><article class="card" id="offprint"><div class="card-top"><span class="index">01 / LONGFORM · OFFPRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>問いを掘り下げ、<br>長く書く</h3><p>ゲームについて考え続けたことを、まとまった長文に。</p></div><div class="card-actions"><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/offprint-latest.jpg" alt="" width="720" height="378" loading="lazy" decoding="async"><span class="latest-label">Latest essay</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">解決不可能な問い：茉莉絵はどうすれば幸福に至れるか？</span></span></a><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">Offprintの記事一覧 →</a></div></article><article class="card" id="note"><div class="card-top"><span class="index">02 / LONGFORM · NOTE</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>ゲームについて、<br>長く書く</h3><p>ゲームの感想や、考え続けたいことを長文に。</p></div><div class="card-actions"><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/note-latest.jpg" alt="" width="720" height="377" loading="lazy" decoding="async"><span class="latest-label">Latest note</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">カリギュラ2の文章を書いたのでリンクを張るための記事</span></span></a><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">noteの記事一覧 →</a></div></article></div></section>
+          <section class="media-group" id="audio" aria-labelledby="audio-heading"><div class="media-group-head"><h3 id="audio-heading">音声</h3><span>AUDIO</span></div><div class="media-group-cards"><article class="card" id="spotify"><div class="card-top"><span class="index">03 / TALK · SPOTIFY</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋で、ゲームについて話します。</p></div><div class="card-actions"><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/spotify-latest.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><span class="latest-label">Latest episode</span></span><span class="latest-copy"><span class="latest-date">2026.10.07</span><span class="latest-title">#169 キャッスルヴァニア 暁月の円舞曲で薄暗</span></span></a><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組をSpotifyで聴く →</a></div></article></div></section>
+        </div>
+        <section class="media-group" id="short-posts" aria-labelledby="short-posts-heading"><div class="media-group-head"><h3 id="short-posts-heading">短文</h3><span>SHORT POSTS</span></div><div class="media-group-cards"><article class="card bluesky-card" id="bluesky"><div class="card-top"><span class="index">04 / SHORT POSTS · BLUESKY</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>最近の砂</h3><p>日々のこと、ゲームの話、更新のお知らせを短い投稿で。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer"><img class="bsky-avatar" id="bsky-avatar" alt="sandriverのBlueskyプロフィール画像" hidden>@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">最近の投稿を取得しています。表示されない場合はプロフィールをご覧ください。</p></div></div></article></div></section>
+        <section class="media-group" id="works" aria-labelledby="works-heading"><div class="media-group-head"><h3 id="works-heading">制作物</h3><span>WORKS</span></div><div class="media-group-cards"><article class="featured-work"><a class="featured-media" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer"><img src="/assets/game-1999.png" alt="『1999』のキービジュアル" width="973" height="615" decoding="async"><span class="featured-tag">PLAY IN BROWSER · ABOUT 15 MIN</span></a><div class="featured-copy"><div><span class="index">05 / GAME</span><h3>1999</h3><p>永遠に続く、1999年7月の夏休み。<br>ループする世紀末の夏休みに閉じ込められた二人の女の子の話です。</p></div><div class="featured-actions"><a href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">『1999』を遊ぶ</a><a href="/works/">制作物一覧</a></div></div></article></div></section>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><div><p class="copyright">© 2026 砂</p></div></footer>
+  <script>
+    const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', terminal:'edition 04 / terminal' };
+    const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', terminal:'#071009' };
+    const style = window.__sandStyle || 'zine';
+    document.querySelector('#edition-name').textContent = names[style];
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', colors[style]);
+    document.querySelector('#offprint h3').textContent = 'Offprint';
+    document.querySelector('#note h3').textContent = 'note';
+    document.querySelector('#bluesky h3').textContent = 'Bluesky';
+
+    const feed = document.querySelector('#bsky-feed');
+    const profileUrl = 'https://bsky.app/profile/sandriver.bsky.social';
+    const avatar = document.querySelector('#bsky-avatar');
+    const feedUrl = 'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=sandriver.bsky.social&filter=posts_no_replies&limit=8';
+    const profileApiUrl = 'https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=sandriver.bsky.social';
+
+    fetch(profileApiUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error('Bluesky profile request failed');
+        return response.json();
+      })
+      .then((profile) => {
+        if (typeof profile.avatar !== 'string' || !profile.avatar) return;
+        avatar.src = profile.avatar;
+        avatar.hidden = false;
+      })
+      .catch(() => {});
+
+    const postUrl = (post) => {
+      const match = typeof post.uri === 'string' && post.uri.match(/\/app\.bsky\.feed\.post\/([^/]+)$/);
+      if (!match) throw new Error('Invalid Bluesky post URI');
+      const rkey = match[1];
+      return profileUrl + '/post/' + encodeURIComponent(rkey);
+    };
+
+    const formatDate = (value) => {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) throw new Error('Invalid Bluesky post date');
+      return new Intl.DateTimeFormat('ja-JP', { month: 'numeric', day: 'numeric' }).format(date);
+    };
+
+    const renderFeed = (items) => {
+      const fragment = document.createDocumentFragment();
+      items.forEach(({ post }) => {
+        if (!post || !post.record || typeof post.record.text !== 'string') throw new Error('Invalid Bluesky post');
+        const link = document.createElement('a');
+        link.className = 'bsky-post';
+        link.href = postUrl(post);
+        link.target = '_blank';
+        link.rel = 'noreferrer';
+
+        const text = document.createElement('span');
+        text.className = 'bsky-post-text';
+        text.textContent = post.record.text.trim() || 'Blueskyの投稿';
+
+        const meta = document.createElement('span');
+        meta.className = 'bsky-post-meta';
+        const date = document.createElement('time');
+        date.dateTime = post.record.createdAt;
+        date.textContent = formatDate(post.record.createdAt);
+        const label = document.createElement('span');
+        label.textContent = 'Blueskyで見る';
+        meta.append(date, label);
+        link.append(text, meta);
+        fragment.append(link);
+      });
+      feed.replaceChildren(fragment);
+      feed.setAttribute('aria-busy', 'false');
+    };
+
+    const showFeedError = () => {
+      const status = document.createElement('span');
+      status.className = 'bsky-status';
+      status.textContent = '投稿を読み込めませんでした。プロフィールからご覧ください。';
+      feed.replaceChildren(status);
+      feed.setAttribute('aria-busy', 'false');
+    };
+
+    const feedController = new AbortController();
+    const feedTimeout = window.setTimeout(() => feedController.abort(), 8000);
+    fetch(feedUrl, { signal: feedController.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error('Bluesky feed request failed');
+        return response.json();
+      })
+      .then((data) => {
+        const items = Array.isArray(data.feed)
+          ? data.feed.filter((item) => !item.reason && item.post?.record?.text).slice(0, 2)
+          : [];
+        if (!items.length) throw new Error('Bluesky feed is empty');
+        renderFeed(items);
+      })
+      .catch(showFeedError)
+      .finally(() => window.clearTimeout(feedTimeout));
+  </script>
+</body>
+</html>
