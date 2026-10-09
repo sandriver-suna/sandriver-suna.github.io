@@ -370,7 +370,7 @@
         link.target = '_blank';
         link.rel = 'noreferrer';
 
-        const text = document.createElement('p');
+        const text = document.createElement('span');
         text.className = 'bsky-post-text';
         text.textContent = post.record.text.trim() || 'Blueskyの投稿';
 
@@ -390,7 +390,7 @@
     };
 
     const showFeedError = () => {
-      const status = document.createElement('p');
+      const status = document.createElement('span');
       status.className = 'bsky-status';
       status.textContent = '投稿を読み込めませんでした。プロフィールからご覧ください。';
       feed.replaceChildren(status);
@@ -406,7 +406,7 @@
       })
       .then((data) => {
         const items = Array.isArray(data.feed)
-          ? data.feed.filter((item) => !item.reason && item.post?.author?.handle === 'sandriver.bsky.social').slice(0, 2)
+          ? data.feed.filter((item) => !item.reason && item.post?.record?.text).slice(0, 2)
           : [];
         if (!items.length) throw new Error('Bluesky feed is empty');
         renderFeed(items);
