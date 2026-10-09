@@ -87,7 +87,7 @@
     .media-cluster { grid-column:1 / -1; display:grid; gap:18px; }
     .media-cluster .media-group + .media-group { margin-top:0; }
     .media-group-head { display:flex; align-items:baseline; justify-content:space-between; gap:20px; padding:12px 0; border-bottom:1px solid var(--rule); }
-    .media-group-head { display:none; }
+    .media-group-head { display:flex; }
     .media-group-head h3 { margin:0; font:700 clamp(1.15rem,2vw,1.5rem)/1.25 var(--display); letter-spacing:-.04em; }
     .media-group-head span { font:12px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
     .media-group-cards { display:grid; grid-template-columns:repeat(12,1fr); gap:18px; padding-top:18px; }
@@ -333,6 +333,9 @@
     const style = window.__sandStyle || 'zine';
     document.querySelector('#edition-name').textContent = names[style];
     document.querySelector('meta[name="theme-color"]').setAttribute('content', colors[style]);
+    document.querySelector('#offprint h3').textContent = 'Offprint';
+    document.querySelector('#note h3').textContent = 'note';
+    document.querySelector('#bluesky h3').textContent = 'Bluesky';
 
     const feed = document.querySelector('#bsky-feed');
     const profileUrl = 'https://bsky.app/profile/sandriver.bsky.social';
