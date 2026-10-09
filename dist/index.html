@@ -136,6 +136,9 @@
     .ticker { overflow: hidden; }
     .ticker-track { width: max-content; display: flex; padding: 10px 0; animation: ticker 26s linear infinite; }
     .ticker-track span { padding-right: 34px; font: 13px/1 var(--mono); text-transform: uppercase; }
+    .current-game { position:fixed; z-index:9; right:18px; bottom:18px; display:grid; gap:3px; max-width:calc(100vw - 36px); padding:10px 13px 11px; color:var(--bg); background:var(--fg); border:1px solid var(--fg); box-shadow:4px 4px 0 var(--accent); font-family:var(--mono); line-height:1.2; }
+    .current-game-label { font-size:10px; letter-spacing:.1em; opacity:.76; }
+    .current-game strong { font:700 15px/1.25 var(--sans); letter-spacing:.02em; }
     footer { min-height: 220px; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end; padding: 48px 0; }
     footer p { max-width: 34ch; margin: 0; }
     footer .mark { font-size: clamp(4rem,9vw,8rem); font-weight: 900; line-height: .72; letter-spacing: -.1em; }
@@ -155,6 +158,7 @@
     html[data-style="zine"] #offprint { background: var(--accent-2); }
     html[data-style="zine"] #bluesky { background: var(--accent); }
     html[data-style="zine"] .ticker { color: var(--bg); background: var(--fg); border-block: 2px solid var(--fg); }
+    html[data-style="zine"] .current-game { transform:rotate(-1.5deg); }
 
     /* 02 — midnight broadcast */
     html[data-style="midnight"] { --bg:#080b1b; --fg:#f6f4ff; --muted:#9ea5c9; --accent:#ff3ea5; --accent-2:#b9ff39; --accent-3:#51d9ff; --card:#11162e; --rule:rgba(142,229,255,.24); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
@@ -176,6 +180,7 @@
     html[data-style="midnight"] .card:hover, html[data-style="midnight"] .card:focus-within { outline:0; box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 22px rgba(81,217,255,.12); }
     html[data-style="midnight"] .glyph { color:var(--accent-3); border-color:var(--accent-3); box-shadow:inset 0 0 16px rgba(81,217,255,.15); }
     html[data-style="midnight"] .ticker { color:var(--bg); background:var(--accent-3); }
+    html[data-style="midnight"] .current-game { color:var(--bg); background:var(--accent-2); border-color:var(--accent-2); box-shadow:0 0 20px rgba(185,255,57,.5); }
 
     /* 03 — quiet Japanese editorial */
     html[data-style="shizuka"] { --bg:#fbfbf9; --fg:#171717; --muted:#77736d; --accent:#9e241e; --accent-2:#ded9cf; --accent-3:#dfe7e2; --card:transparent; --rule:rgba(23,23,23,.2); --sans:"Shippori Mincho",serif; --display:"Shippori Mincho",serif; --wrap:min(1040px,calc(100% - 64px)); }
@@ -205,6 +210,7 @@
     html[data-style="shizuka"] .meta { color:var(--muted); }
     html[data-style="shizuka"] .card-actions { grid-column:2; margin-top:0; }
     html[data-style="shizuka"] .ticker { color:var(--bg); background:var(--fg); }
+    html[data-style="shizuka"] .current-game { color:var(--fg); background:var(--bg); border-color:var(--fg); box-shadow:none; }
 
     /* 04 — toy-box pop */
 
@@ -241,6 +247,7 @@
     html[data-style="terminal"] .card-actions { margin:0; }
     html[data-style="terminal"] .ticker { color:var(--bg); background:var(--fg); text-shadow:none; }
     html[data-style="terminal"] footer .mark { font-family:var(--display); font-weight:400; }
+    html[data-style="terminal"] .current-game { color:var(--bg); background:var(--fg); border-style:dashed; box-shadow:none; }
 
     @keyframes ticker { to { transform:translateX(-50%); } }
     @keyframes cursor { 50% { opacity:0; } }
@@ -268,6 +275,8 @@
       #note .latest-image, #offprint .latest-image { display:block; }
       .card-actions, .card-actions a.latest, .latest-media { width:100%; max-width:100%; min-width:0; }
       .latest-image { max-width:100%; }
+      .current-game { right:12px; bottom:12px; max-width:calc(100vw - 24px); padding:8px 10px 9px; }
+      .current-game strong { font-size:14px; }
       footer { grid-template-columns:1fr; }
       footer .mark { justify-self:end; }
       html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
@@ -306,6 +315,7 @@
       </div>
     </section>
   </main>
+  <aside class="current-game" aria-label="いま熱いゲーム"><span class="current-game-label">NOW PLAYING</span><strong>カリギュラ2</strong></aside>
   <footer class="wrap"><div><p class="copyright">© 2026 砂</p></div></footer>
   <script>
     const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', terminal:'edition 04 / terminal' };
