@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="砂の文章、ポッドキャスト、ゲームをまとめたリンク集。">
+  <meta name="description" content="砂の文章、ポッドキャスト、ゲーム。">
   <meta name="theme-color" content="#080b1b">
   <title>砂の砂場</title>
   <script src="/analytics-config.js"></script>
@@ -63,6 +63,8 @@
     html { scroll-behavior: smooth; }
     body { margin: 0; min-width: 320px; color: var(--fg); background: var(--bg); font-family: var(--sans); font-size: 16px; line-height: 1.7; transition: color .2s, background .2s; }
     a { color: inherit; }
+    .skip-link { position:fixed; z-index:20; top:10px; left:10px; padding:10px 14px; color:var(--bg); background:var(--fg); font:700 14px/1.4 var(--sans); text-decoration:none; transform:translateY(-160%); transition:transform .18s ease; }
+    .skip-link:focus { transform:translateY(0); outline:3px solid var(--accent); outline-offset:3px; }
     .wrap { width: var(--wrap); margin-inline: auto; }
     .site-header { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--rule); }
     .signature { font-family: var(--mono); font-weight: 500; letter-spacing: -.04em; text-decoration: none; }
@@ -75,7 +77,7 @@
     .hero-note p { margin: 0; }
     .hero-note small { display: block; margin-top: 18px; font: 12px/1.4 var(--mono); text-transform: uppercase; }
     .role-line { max-width:34rem; margin:28px 0 0; font-weight:700; }
-    .quick-nav { display:grid; grid-template-columns:repeat(5,1fr); border-bottom:1px solid var(--rule); }
+    .quick-nav { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--rule); }
     .quick-nav a { min-width:0; padding:15px 10px; border-right:1px solid var(--rule); font:12px/1.4 var(--mono); text-align:center; text-decoration:none; }
     .quick-nav a:first-child { border-left:1px solid var(--rule); }
     .quick-nav a:hover { background:var(--card); }
@@ -105,7 +107,7 @@
     .media-cluster .media-group + .media-group { margin-top:0; }
     .media-group-head { display:flex; align-items:baseline; justify-content:space-between; gap:20px; padding:12px 0; border-bottom:1px solid var(--rule); }
     .media-group-head { display:flex; }
-    .media-group-head h3 { margin:0; font:700 clamp(1.15rem,2vw,1.5rem)/1.25 var(--display); letter-spacing:-.04em; }
+    .media-group-head h2 { margin:0; font:700 clamp(1.15rem,2vw,1.5rem)/1.25 var(--display); letter-spacing:-.04em; }
     .media-group-head span { font:12px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
     .media-group-cards { display:grid; grid-template-columns:repeat(12,1fr); gap:18px; padding-top:18px; }
     .media-group-cards .card { grid-column:span 12; }
@@ -227,7 +229,6 @@
       .quick-nav { grid-template-columns:repeat(2,1fr); }
       .quick-nav a:nth-child(odd) { border-left:1px solid var(--rule); }
       .quick-nav a { border-top:1px solid var(--rule); }
-      .quick-nav a:last-child { grid-column:span 2; }
       .section-head { padding-top:34px; }
       .featured-work { grid-template-columns:1fr; min-height:0; }
       .featured-media { min-height:0; aspect-ratio:973/615; }
@@ -250,23 +251,24 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
   <header class="site-header wrap">
     <a class="signature" href="#top">砂の砂場 / INDEX</a>
     <span class="edition" id="edition-name">random edition</span>
   </header>
-  <main id="top">
+  <main id="main-content" tabindex="-1">
     <section class="hero wrap" aria-labelledby="page-title">
       <div><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1></div>
     </section>
     <nav class="quick-nav wrap" aria-label="活動へのショートカット"><a href="#longform">長文</a><a href="#audio">音声</a><a href="#short-posts">短文</a><a href="#works">制作物</a></nav>
-    <section class="wrap" aria-labelledby="links-heading">
+    <section class="wrap" aria-label="活動">
       <div class="links">
         <div class="media-cluster">
-          <section class="media-group" id="longform" aria-labelledby="longform-heading"><div class="media-group-head"><h3 id="longform-heading">長文</h3><span>LONGFORM</span></div><div class="media-group-cards"><article class="card" id="offprint"><div class="card-top"><span class="index">01 / LONGFORM · OFFPRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>問いを掘り下げ、<br>長く書く</h3><p>ゲームについて考え続けたことを、まとまった長文に。</p></div><div class="card-actions"><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/offprint-latest.jpg" alt="" width="720" height="378" loading="lazy" decoding="async"><span class="latest-label">Latest essay</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">解決不可能な問い：茉莉絵はどうすれば幸福に至れるか？</span></span></a><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">Offprintの記事一覧 →</a></div></article><article class="card" id="note"><div class="card-top"><span class="index">02 / LONGFORM · NOTE</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>ゲームについて、<br>長く書く</h3><p>ゲームの感想や、考え続けたいことを長文に。</p></div><div class="card-actions"><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/note-latest.jpg" alt="" width="720" height="377" loading="lazy" decoding="async"><span class="latest-label">Latest note</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">カリギュラ2の文章を書いたのでリンクを張るための記事</span></span></a><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">noteの記事一覧 →</a></div></article></div></section>
-          <section class="media-group" id="audio" aria-labelledby="audio-heading"><div class="media-group-head"><h3 id="audio-heading">音声</h3><span>AUDIO</span></div><div class="media-group-cards"><article class="card" id="spotify"><div class="card-top"><span class="index">03 / TALK · SPOTIFY</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋で、ゲームについて話します。</p></div><div class="card-actions"><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/spotify-latest.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><span class="latest-label">Latest episode</span></span><span class="latest-copy"><span class="latest-date">2026.10.07</span><span class="latest-title">#169 キャッスルヴァニア 暁月の円舞曲で薄暗</span></span></a><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組をSpotifyで聴く →</a></div></article></div></section>
+          <section class="media-group" id="longform" aria-labelledby="longform-heading"><div class="media-group-head"><h2 id="longform-heading">長文</h2><span>LONGFORM</span></div><div class="media-group-cards"><article class="card" id="offprint"><div class="card-top"><span class="index">01 / LONGFORM · OFFPRINT</span><span class="glyph" aria-hidden="true">□</span></div><div><h3>問いを掘り下げ、<br>長く書く</h3><p>ゲームについて考え続けたことを、まとまった長文に。</p></div><div class="card-actions"><a class="latest" href="https://sandriver.offprint.app/a/3musvhbezvr23--5" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/offprint-latest.jpg" alt="" width="720" height="378" loading="lazy" decoding="async"><span class="latest-label">Latest essay</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">解決不可能な問い：茉莉絵はどうすれば幸福に至れるか？</span></span></a><a href="https://sandriver.offprint.app/" target="_blank" rel="noreferrer">Offprintの記事一覧 →</a></div></article><article class="card" id="note"><div class="card-top"><span class="index">02 / LONGFORM · NOTE</span><span class="glyph" aria-hidden="true">N</span></div><div><h3>ゲームについて、<br>長く書く</h3><p>ゲームの感想や、考え続けたいことを長文に。</p></div><div class="card-actions"><a class="latest" href="https://note.com/sandriver/n/n9bb2eefb3976" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/note-latest.jpg" alt="" width="720" height="377" loading="lazy" decoding="async"><span class="latest-label">Latest note</span></span><span class="latest-copy"><span class="latest-date">2026.09.06</span><span class="latest-title">カリギュラ2の文章を書いたのでリンクを張るための記事</span></span></a><a href="https://note.com/sandriver" target="_blank" rel="noreferrer">noteの記事一覧 →</a></div></article></div></section>
+          <section class="media-group" id="audio" aria-labelledby="audio-heading"><div class="media-group-head"><h2 id="audio-heading">音声</h2><span>AUDIO</span></div><div class="media-group-cards"><article class="card" id="spotify"><div class="card-top"><span class="index">03 / TALK · SPOTIFY</span><span class="glyph" aria-hidden="true">◉</span></div><div><h3>ゲーム薄暗<br>ポッドキャスト</h3><p>薄暗い部屋で、ゲームについて話します。</p></div><div class="card-actions"><a class="latest" href="https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD" target="_blank" rel="noreferrer"><span class="latest-media"><img class="latest-image" src="/assets/spotify-latest.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><span class="latest-label">Latest episode</span></span><span class="latest-copy"><span class="latest-date">2026.10.07</span><span class="latest-title">#169 キャッスルヴァニア 暁月の円舞曲で薄暗</span></span></a><a href="https://open.spotify.com/show/7vFhkRfDMLdjfOqxunwwLO" target="_blank" rel="noreferrer">番組をSpotifyで聴く →</a></div></article></div></section>
         </div>
-        <section class="media-group" id="short-posts" aria-labelledby="short-posts-heading"><div class="media-group-head"><h3 id="short-posts-heading">短文</h3><span>SHORT POSTS</span></div><div class="media-group-cards"><article class="card bluesky-card" id="bluesky"><div class="card-top"><span class="index">04 / SHORT POSTS · BLUESKY</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>最近の砂</h3><p>日々のこと、ゲームの話、更新のお知らせを短い投稿で。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer"><img class="bsky-avatar" id="bsky-avatar" alt="sandriverのBlueskyプロフィール画像" hidden>@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">最近の投稿を取得しています。表示されない場合はプロフィールをご覧ください。</p></div></div></article></div></section>
-        <section class="media-group" id="works" aria-labelledby="works-heading"><div class="media-group-head"><h3 id="works-heading">制作物</h3><span>WORKS</span></div><div class="media-group-cards"><article class="featured-work"><a class="featured-media" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer"><img src="/assets/game-1999.png" alt="『1999』のキービジュアル" width="973" height="615" decoding="async"><span class="featured-tag">PLAY IN BROWSER · ABOUT 15 MIN</span></a><div class="featured-copy"><div><span class="index">05 / GAME</span><h3>1999</h3><p>永遠に続く、1999年7月の夏休み。<br>ループする世紀末の夏休みに閉じ込められた二人の女の子の話です。</p></div><div class="featured-actions"><a href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">『1999』を遊ぶ</a><a href="/works/">制作物一覧</a></div></div></article></div></section>
+        <section class="media-group" id="short-posts" aria-labelledby="short-posts-heading"><div class="media-group-head"><h2 id="short-posts-heading">短文</h2><span>SHORT POSTS</span></div><div class="media-group-cards"><article class="card bluesky-card" id="bluesky"><div class="card-top"><span class="index">04 / SHORT POSTS · BLUESKY</span><span class="glyph" aria-hidden="true">⌁</span></div><div class="bsky-card-body"><div><h3>最近の砂</h3><p>日々のこと、ゲームの話、更新のお知らせを短い投稿で。</p></div><a class="bsky-profile" href="https://bsky.app/profile/sandriver.bsky.social" target="_blank" rel="noreferrer"><img class="bsky-avatar" id="bsky-avatar" alt="sandriverのBlueskyプロフィール画像" hidden>@sandriver.bsky.social</a><div class="bsky-feed" id="bsky-feed" aria-live="polite" aria-busy="true"><p class="bsky-status">最近の投稿を取得しています。表示されない場合はプロフィールをご覧ください。</p></div></div></article></div></section>
+        <section class="media-group" id="works" aria-labelledby="works-heading"><div class="media-group-head"><h2 id="works-heading">制作物</h2><span>WORKS</span></div><div class="media-group-cards"><article class="featured-work"><a class="featured-media" href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer"><img src="/assets/game-1999.png" alt="『1999』のキービジュアル" width="973" height="615" decoding="async"><span class="featured-tag">PLAY IN BROWSER · ABOUT 15 MIN</span></a><div class="featured-copy"><div><span class="index">05 / GAME</span><h3>1999</h3><p>永遠に続く、1999年7月の夏休み。<br>ループする世紀末の夏休みに閉じ込められた二人の女の子の話です。</p></div><div class="featured-actions"><a href="https://novelgame.jp/games/show/12951" target="_blank" rel="noreferrer">『1999』を遊ぶ</a><a href="/works/">制作物一覧</a></div></div></article></div></section>
       </div>
     </section>
   </main>

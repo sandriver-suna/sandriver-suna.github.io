@@ -57,11 +57,13 @@
     html { scroll-behavior:smooth; }
     body { margin:0; min-width:320px; color:var(--fg); background:var(--bg); font:16px/1.75 var(--sans); }
     a { color:inherit; }
+    .skip-link { position:fixed; z-index:20; top:10px; left:10px; padding:10px 14px; color:var(--bg); background:var(--fg); font:700 14px/1.4 var(--sans); text-decoration:none; transform:translateY(-160%); transition:transform .18s ease; }
+    .skip-link:focus { transform:translateY(0); outline:3px solid var(--accent); outline-offset:3px; }
     .wrap { width:var(--wrap); margin-inline:auto; }
     header { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-bottom:1px solid var(--rule); }
     .home { font:500 14px/1.2 var(--mono); text-decoration:none; }
     .edition { font:12px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
-    .hero { min-height:360px; display:grid; grid-template-columns:1.4fr .6fr; gap:48px; align-items:center; padding:58px 0; border-bottom:1px solid var(--rule); }
+    .hero { min-height:300px; display:grid; align-items:center; padding:58px 0; border-bottom:1px solid var(--rule); }
     .eyebrow { margin:0 0 20px; font:13px/1.2 var(--mono); letter-spacing:.12em; text-transform:uppercase; }
     h1 { margin:0; font:900 clamp(4rem,9vw,7.5rem)/.9 var(--display); letter-spacing:-.09em; }
     .intro { max-width:20rem; margin:0; font-size:1.15rem; font-weight:700; }
@@ -125,8 +127,9 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
   <header class="wrap"><a class="home" href="/">砂の砂場 / HOME</a><span class="edition" id="edition-name">random edition</span></header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="hero wrap">
       <div><h1>制作物</h1></div>
     </section>
