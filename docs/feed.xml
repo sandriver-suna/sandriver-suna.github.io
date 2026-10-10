@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>砂の砂場 - 更新情報</title>
+    <link>https://sandriver-suna.github.io/</link>
+    <atom:link href="https://sandriver-suna.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <description>砂の文章、ポッドキャスト、ゲームの更新情報。</description>
+    <language>ja</language>
+    <lastBuildDate>Wed, 07 Oct 2026 00:00:00 +0900</lastBuildDate>
+    <item>
+      <title>ゲーム薄暗ポッドキャスト #169 キャッスルヴァニア 暁月の円舞曲で薄暗</title>
+      <link>https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD</link>
+      <guid isPermaLink="true">https://open.spotify.com/episode/33Nx85hO7cHvIXT0Es4SRD</guid>
+      <pubDate>Wed, 07 Oct 2026 00:00:00 +0900</pubDate>
+      <description><![CDATA[ゲーム薄暗ポッドキャストの最新エピソードです。]]></description>
+    </item>
+    <item>
+      <title>note: カリギュラ2の文章を書いたのでリンクを張るための記事</title>
+      <link>https://note.com/sandriver/n/n9bb2eefb3976</link>
+      <guid isPermaLink="true">https://note.com/sandriver/n/n9bb2eefb3976</guid>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+      <description><![CDATA[note の新しい記事です。]]></description>
+    </item>
+    <item>
+      <title>Offprint: 解決不可能な問い：茉莉絵はどうすれば幸福に至れるか？</title>
+      <link>https://sandriver.offprint.app/a/3musvhbezvr23--5</link>
+      <guid isPermaLink="true">https://sandriver.offprint.app/a/3musvhbezvr23--5</guid>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+      <description><![CDATA[Offprint の新しい記事です。]]></description>
+    </item>
+  </channel>
+</rss>

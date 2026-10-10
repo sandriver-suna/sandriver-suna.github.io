@@ -7,6 +7,7 @@
 
 - GitHub Pages の公開対象は `docs` ディレクトリにする。
 - 今後の更新は `docs` のみを編集する。`dist` は公開対象として使用しない。
+- RSS フィードは `docs/feed.xml`（公開 URL: `https://sandriver-suna.github.io/feed.xml`）。新しい記事・エピソード・作品を掲載したら、タイトル、公開日、リンクを追加・更新する。
 
 ## サイトの役割
 
