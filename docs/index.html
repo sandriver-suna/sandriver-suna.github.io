@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ja" data-style="zine">
+<html lang="ja" data-style="midnight">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="砂の文章、ポッドキャスト、ゲームをまとめたリンク集。">
-  <meta name="theme-color" content="#f2efdf">
+  <meta name="theme-color" content="#080b1b">
   <title>砂の砂場</title>
   <script src="/analytics-config.js"></script>
   <script>
@@ -25,7 +25,7 @@
   </script>
   <script>
     (() => {
-      const styles = ['zine', 'midnight', 'shizuka', 'terminal'];
+      const styles = ['midnight', 'gameboy'];
       const cookieName = 'sand_style';
       let saved;
       try { saved = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '=')); }
@@ -161,23 +161,7 @@
     footer .mark { font-size: clamp(4rem,9vw,8rem); font-weight: 900; line-height: .72; letter-spacing: -.1em; }
     .copyright { margin-top: 14px; color: var(--muted); font-size: .86rem; }
 
-    /* 01 — cut-and-paste zine */
-    html[data-style="zine"] body { background: radial-gradient(circle at 15% 10%,rgba(245,201,69,.22),transparent 24rem), linear-gradient(rgba(32,42,34,.035) 1px,transparent 1px), linear-gradient(90deg,rgba(32,42,34,.035) 1px,transparent 1px), var(--bg); background-size: auto,24px 24px,24px 24px,auto; }
-    html[data-style="zine"] .title-top { font-size: .34em; letter-spacing: -.03em; margin: 0 0 .26em .08em; }
-    html[data-style="zine"] .title-main { color: transparent; -webkit-text-stroke: 2px var(--fg); }
-    html[data-style="zine"] .hero-note { background: var(--accent-2); border: 2px solid var(--fg); transform: rotate(2.2deg); box-shadow: 8px 8px 0 var(--fg); }
-    html[data-style="zine"] .featured-work { background:var(--accent-2); box-shadow:10px 10px 0 var(--fg); }
-    html[data-style="zine"] .featured-work:hover { transform:translate(-4px,-4px); box-shadow:14px 14px 0 var(--fg); }
-    html[data-style="zine"] .card { border: 2px solid var(--fg); }
-    html[data-style="zine"] .card:hover, html[data-style="zine"] .card:focus-within { z-index: 2; outline: 0; box-shadow: 7px 7px 0 var(--fg); }
-    html[data-style="zine"] #spotify { color: var(--bg); background: var(--fg); }
-    html[data-style="zine"] #note { background: var(--accent-3); }
-    html[data-style="zine"] #offprint { background: var(--accent-2); }
-    html[data-style="zine"] #bluesky { background: var(--accent); }
-    html[data-style="zine"] .ticker { color: var(--bg); background: var(--fg); border-block: 2px solid var(--fg); }
-    html[data-style="zine"] .current-game { transform:rotate(-1.5deg); }
-
-    /* 02 — midnight broadcast */
+    /* 01 — midnight broadcast */
     html[data-style="midnight"] { --bg:#080b1b; --fg:#f6f4ff; --muted:#9ea5c9; --accent:#ff3ea5; --accent-2:#b9ff39; --accent-3:#51d9ff; --card:#11162e; --rule:rgba(142,229,255,.24); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
     html[data-style="midnight"] body { background: linear-gradient(120deg,rgba(255,62,165,.12),transparent 35%), radial-gradient(circle at 85% 20%,rgba(81,217,255,.18),transparent 30rem), #080b1b; }
     html[data-style="midnight"] body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:10; background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.018) 3px 4px); }
@@ -199,75 +183,39 @@
     html[data-style="midnight"] .ticker { color:var(--bg); background:var(--accent-3); }
     html[data-style="midnight"] .current-game { color:var(--bg); background:var(--accent-2); border-color:var(--accent-2); box-shadow:0 0 20px rgba(185,255,57,.5); }
 
-    /* 03 — quiet Japanese editorial */
-    html[data-style="shizuka"] { --bg:#fbfbf9; --fg:#171717; --muted:#77736d; --accent:#9e241e; --accent-2:#ded9cf; --accent-3:#dfe7e2; --card:transparent; --rule:rgba(23,23,23,.2); --sans:"Shippori Mincho",serif; --display:"Shippori Mincho",serif; --wrap:min(1040px,calc(100% - 64px)); }
-    html[data-style="shizuka"] .site-header { min-height:96px; }
-    html[data-style="shizuka"] .signature { font-family:var(--display); letter-spacing:.14em; }
-    html[data-style="shizuka"] .edition { color:var(--muted); }
-    html[data-style="shizuka"] .hero { min-height:620px; grid-template-columns:1fr 180px; align-items:center; padding:80px 0; }
-    html[data-style="shizuka"] .eyebrow { letter-spacing:.22em; }
-    html[data-style="shizuka"] h1 { font-size:clamp(5rem,12vw,9rem); font-weight:600; letter-spacing:.02em; line-height:1.12; }
-    html[data-style="shizuka"] .title-top { font-size:.4em; margin-left:3.1em; }
-    html[data-style="shizuka"] .hero-note { align-self:stretch; max-width:none; padding:28px 22px; border-left:1px solid var(--fg); writing-mode:vertical-rl; letter-spacing:.12em; font-weight:400; }
-    html[data-style="shizuka"] .hero-note small { margin:0 18px 0 0; }
-    html[data-style="shizuka"] .section-head { padding-top:70px; }
-    html[data-style="shizuka"] h2 { font-family:var(--display); font-weight:600; letter-spacing:.06em; }
-    html[data-style="shizuka"] .featured-work { grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr); border-width:1px 0; }
-    html[data-style="shizuka"] .featured-copy h3 { font-weight:600; letter-spacing:.04em; }
-    html[data-style="shizuka"] .links { display:block; }
-    html[data-style="shizuka"] .media-group + .media-group { margin-top:34px; }
-    html[data-style="shizuka"] .media-group-head { padding:16px 0; }
-    html[data-style="shizuka"] .media-group-cards { display:block; padding-top:0; }
-    html[data-style="shizuka"] .card { min-height:176px; display:grid; grid-template-columns:170px 1fr; gap:32px; align-items:center; padding:28px 0; border-top:1px solid var(--rule); }
-    html[data-style="shizuka"] .card:last-child { border-bottom:1px solid var(--rule); }
-    html[data-style="shizuka"] .card:hover, html[data-style="shizuka"] .card:focus-within { outline:0; color:var(--accent); }
-    html[data-style="shizuka"] .card-top { align-self:start; }
-    html[data-style="shizuka"] .card h3 { margin-top:0; font-size:clamp(1.8rem,4vw,3.3rem); font-weight:600; letter-spacing:.02em; }
-    html[data-style="shizuka"] .glyph { width:34px; height:34px; font-size:13px; }
-    html[data-style="shizuka"] .meta { color:var(--muted); }
-    html[data-style="shizuka"] .card-actions { grid-column:2; margin-top:0; }
-    html[data-style="shizuka"] .ticker { color:var(--bg); background:var(--fg); }
-    html[data-style="shizuka"] .current-game { color:var(--fg); background:var(--bg); border-color:var(--fg); box-shadow:none; }
-
-    /* 04 — toy-box pop */
-
-    /* 05 — green-screen terminal */
-    html[data-style="terminal"] { --bg:#071009; --fg:#82ff8c; --muted:#4cad54; --accent:#d4ff63; --accent-2:#82ff8c; --accent-3:#82ff8c; --card:#071009; --rule:rgba(130,255,140,.42); --sans:"DM Mono",monospace; --display:"DotGothic16",monospace; --mono:"DM Mono",monospace; --wrap:min(980px,calc(100% - 36px)); }
-    html[data-style="terminal"] body { background:linear-gradient(rgba(130,255,140,.025) 50%,transparent 50%) 0 0/100% 4px,var(--bg); text-shadow:0 0 8px rgba(130,255,140,.22); }
-    html[data-style="terminal"] .site-header { min-height:68px; border-style:dashed; text-transform:uppercase; }
-    html[data-style="terminal"] .signature::before { content:"> "; }
-    html[data-style="terminal"] .edition::before { content:"session: "; color:var(--muted); }
-    html[data-style="terminal"] .hero { min-height:500px; grid-template-columns:1fr; align-items:center; padding:80px 0; border-style:dashed; }
-    html[data-style="terminal"] .eyebrow::before { content:"/* "; }
-    html[data-style="terminal"] .eyebrow::after { content:" */"; }
-    html[data-style="terminal"] h1 { font-size:clamp(4.3rem,13vw,9rem); font-weight:400; letter-spacing:.02em; line-height:1; }
-    html[data-style="terminal"] .title-top { font-size:.34em; }
-    html[data-style="terminal"] .title-main::after { content:"_"; animation:cursor 1s step-end infinite; }
-    html[data-style="terminal"] .hero-note { justify-self:start; max-width:620px; padding:18px; border:1px dashed var(--fg); font-weight:400; }
-    html[data-style="terminal"] .hero-note::before { content:"$ whoami\A"; white-space:pre; color:var(--accent); }
-    html[data-style="terminal"] .section-head { border-bottom:1px dashed var(--rule); }
-    html[data-style="terminal"] h2 { font-family:var(--display); font-weight:400; }
-    html[data-style="terminal"] h2::before { content:"./"; }
-    html[data-style="terminal"] .featured-work { grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr); border:1px dashed var(--fg); }
-    html[data-style="terminal"] .featured-copy h3 { font-weight:400; letter-spacing:0; }
-    html[data-style="terminal"] .featured-tag { color:var(--bg); background:var(--fg); }
-    html[data-style="terminal"] .links { display:block; }
-    html[data-style="terminal"] .media-group + .media-group { margin-top:28px; }
-    html[data-style="terminal"] .media-group-head { border-bottom-style:dashed; }
-    html[data-style="terminal"] .media-group-cards { display:block; padding-top:0; }
-    html[data-style="terminal"] .card { min-height:0; display:grid; grid-template-columns:120px minmax(0,1fr) minmax(260px,.78fr); gap:24px; align-items:center; padding:24px 0; border-bottom:1px dashed var(--rule); }
-    html[data-style="terminal"] .card:hover, html[data-style="terminal"] .card:focus-within { outline:0; box-shadow:inset 4px 0 0 var(--fg); }
-    html[data-style="terminal"] .card-top { display:block; }
-    html[data-style="terminal"] .glyph { width:34px; height:34px; margin-top:10px; border-radius:0; }
-    html[data-style="terminal"] .card h3 { margin:0 0 7px; font-size:clamp(1.6rem,4vw,2.7rem); font-weight:400; letter-spacing:0; }
-    html[data-style="terminal"] .meta { margin:0; text-align:right; }
-    html[data-style="terminal"] .card-actions { margin:0; }
-    html[data-style="terminal"] .ticker { color:var(--bg); background:var(--fg); text-shadow:none; }
-    html[data-style="terminal"] footer .mark { font-family:var(--display); font-weight:400; }
-    html[data-style="terminal"] .current-game { color:var(--bg); background:var(--fg); border-style:dashed; box-shadow:none; }
+    /* 02 — Game Boy screen */
+    html[data-style="gameboy"] { --bg:#9bbc0f; --fg:#0f380f; --muted:#306230; --accent:#0f380f; --accent-2:#8bac0f; --accent-3:#306230; --card:#8bac0f; --rule:rgba(15,56,15,.62); --sans:"DotGothic16",monospace; --display:"DotGothic16",monospace; --mono:"DM Mono",monospace; --wrap:min(980px,calc(100% - 36px)); }
+    html[data-style="gameboy"] body { background:repeating-linear-gradient(0deg,rgba(15,56,15,.07) 0 1px,transparent 1px 4px),var(--bg); image-rendering:pixelated; }
+    html[data-style="gameboy"] .site-header, html[data-style="gameboy"] .hero { border-color:var(--fg); }
+    html[data-style="gameboy"] .edition { color:var(--muted); }
+    html[data-style="gameboy"] h1 { font-size:clamp(3.5rem,9vw,8rem); font-weight:400; letter-spacing:.02em; line-height:1; text-shadow:4px 4px 0 var(--accent-2); }
+    html[data-style="gameboy"] .title-top { font-size:.34em; letter-spacing:.08em; }
+    html[data-style="gameboy"] .hero-note { justify-self:start; max-width:540px; padding:18px; color:var(--bg); background:var(--fg); border:4px solid var(--fg); box-shadow:6px 6px 0 var(--muted); font-weight:400; }
+    html[data-style="gameboy"] .hero-note small { color:var(--accent-2); }
+    html[data-style="gameboy"] .quick-nav a:hover { color:var(--bg); background:var(--fg); }
+    html[data-style="gameboy"] .featured-work { border:4px solid var(--fg); background:var(--card); box-shadow:8px 8px 0 var(--fg); }
+    html[data-style="gameboy"] .featured-work:hover { transform:translate(-3px,-3px); box-shadow:11px 11px 0 var(--fg); }
+    html[data-style="gameboy"] .featured-media { background:var(--muted); }
+    html[data-style="gameboy"] .featured-media img { filter:grayscale(1) contrast(1.12) sepia(.5) hue-rotate(38deg) saturate(.72); mix-blend-mode:multiply; }
+    html[data-style="gameboy"] .featured-tag { color:var(--bg); background:var(--fg); }
+    html[data-style="gameboy"] .featured-copy h3 { font-weight:400; letter-spacing:.01em; }
+    html[data-style="gameboy"] .featured-actions a { border-width:2px; }
+    html[data-style="gameboy"] .featured-actions a:first-child { color:var(--bg); background:var(--fg); }
+    html[data-style="gameboy"] .links { gap:14px; }
+    html[data-style="gameboy"] .card { min-height:250px; border:3px solid var(--fg); background:var(--card); box-shadow:5px 5px 0 var(--fg); }
+    html[data-style="gameboy"] .card:hover, html[data-style="gameboy"] .card:focus-within { outline:0; transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--fg); }
+    html[data-style="gameboy"] .glyph { border-radius:0; color:var(--bg); background:var(--fg); }
+    html[data-style="gameboy"] #spotify { color:var(--bg); background:var(--fg); }
+    html[data-style="gameboy"] #note { background:#8bac0f; }
+    html[data-style="gameboy"] #offprint { background:#9bbc0f; }
+    html[data-style="gameboy"] #bluesky { background:#306230; color:#9bbc0f; }
+    html[data-style="gameboy"] #bluesky .glyph { color:var(--fg); background:var(--bg); }
+    html[data-style="gameboy"] .latest-image, html[data-style="gameboy"] .bsky-avatar { filter:grayscale(1) contrast(1.15) sepia(.55) hue-rotate(38deg) saturate(.72); }
+    html[data-style="gameboy"] .ticker { color:var(--bg); background:var(--fg); border-block:3px solid var(--fg); }
+    html[data-style="gameboy"] .current-game { color:var(--bg); background:var(--fg); border:3px solid var(--bg); box-shadow:5px 5px 0 var(--muted); }
+    html[data-style="gameboy"] footer .mark { font-family:var(--display); font-weight:400; }
 
     @keyframes ticker { to { transform:translateX(-50%); } }
-    @keyframes cursor { 50% { opacity:0; } }
     @media (max-width:760px) {
       :root { --wrap:min(100% - 24px,680px); }
       .site-header { min-height:66px; }
@@ -281,7 +229,7 @@
       .quick-nav a { border-top:1px solid var(--rule); }
       .quick-nav a:last-child { grid-column:span 2; }
       .section-head { padding-top:34px; }
-      .featured-work, html[data-style="shizuka"] .featured-work, html[data-style="terminal"] .featured-work { grid-template-columns:1fr; min-height:0; }
+      .featured-work { grid-template-columns:1fr; min-height:0; }
       .featured-media { min-height:0; aspect-ratio:973/615; }
       .featured-copy { padding:24px; }
       .featured-copy h3 { font-size:clamp(3.8rem,18vw,6rem); }
@@ -296,16 +244,6 @@
       .current-game strong { font-size:14px; }
       footer { grid-template-columns:1fr; }
       footer .mark { justify-self:end; }
-      html[data-style="shizuka"] { --wrap:min(100% - 30px,680px); }
-      html[data-style="shizuka"] .hero { min-height:430px; grid-template-columns:1fr 74px; padding:48px 0; }
-      html[data-style="shizuka"] .hero-note { max-width:none; padding:16px 10px; font-size:.88rem; }
-      html[data-style="shizuka"] .hero-note small { display:none; }
-      html[data-style="shizuka"] .card { min-height:190px; grid-template-columns:1fr; gap:14px; padding:24px 0; }
-      html[data-style="shizuka"] .card-actions { grid-column:1; }
-      html[data-style="terminal"] .hero { min-height:430px; }
-      html[data-style="terminal"] .card { min-height:0; grid-template-columns:1fr; gap:14px; padding:22px 0; }
-      html[data-style="terminal"] .meta { grid-column:1; text-align:left; }
-      html[data-style="terminal"] .card-actions { grid-column:1; }
       html[data-style] .hero { min-height:0; padding-top:40px; padding-bottom:38px; }
     }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
@@ -335,9 +273,9 @@
   <aside class="current-game" aria-label="いま熱いもの"><span class="current-game-label">今熱いもの</span><strong>カリギュラ2</strong></aside>
   <footer class="wrap"><div><p class="copyright">© 2026 砂</p></div></footer>
   <script>
-    const names = { zine:'edition 01 / zine', midnight:'edition 02 / midnight', shizuka:'edition 03 / shizuka', terminal:'edition 04 / terminal' };
-    const colors = { zine:'#f2efdf', midnight:'#080b1b', shizuka:'#fbfbf9', terminal:'#071009' };
-    const style = window.__sandStyle || 'zine';
+    const names = { midnight:'edition 01 / midnight', gameboy:'edition 02 / game boy' };
+    const colors = { midnight:'#080b1b', gameboy:'#9bbc0f' };
+    const style = window.__sandStyle || 'midnight';
     document.querySelector('#edition-name').textContent = names[style];
     document.querySelector('meta[name="theme-color"]').setAttribute('content', colors[style]);
     document.querySelector('#offprint h3').textContent = 'Offprint';
