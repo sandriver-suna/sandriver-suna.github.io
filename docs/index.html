@@ -6,6 +6,23 @@
   <meta name="description" content="砂の文章、ポッドキャスト、ゲームをまとめたリンク集。">
   <meta name="theme-color" content="#f2efdf">
   <title>砂の砂場</title>
+  <script src="/analytics-config.js"></script>
+  <script>
+    (() => {
+      const measurementId = window.SAND_ANALYTICS_CONFIG?.ga4MeasurementId?.trim();
+      if (!/^G-[A-Z0-9]{6,}$/i.test(measurementId || '')) return;
+
+      const analyticsScript = document.createElement('script');
+      analyticsScript.async = true;
+      analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+      document.head.appendChild(analyticsScript);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId);
+    })();
+  </script>
   <script>
     (() => {
       const styles = ['zine', 'midnight', 'shizuka', 'terminal'];

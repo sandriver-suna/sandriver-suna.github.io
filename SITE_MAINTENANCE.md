@@ -75,6 +75,13 @@ note を「短く書く」とは扱わないこと。短文は Bluesky、長文�
 - ChatGPT Sites には今後公開しない。ChatGPT Sites 用の保存・デプロイ操作も行わない。
 - 公開先を変更する場合は、この項目と公開 URL を先に更新する。
 
+## Google Analytics 4
+
+- GA4 を有効にする場合は、`docs/analytics-config.js` の `ga4MeasurementId` に Measurement ID（`G-` から始まる ID）を設定する。
+- 初期値は空で、空または形式が不正な場合は Analytics を読み込まない。
+- Measurement ID は公開ページで使われる識別子。秘密鍵、API キー、サービスアカウント情報はこのリポジトリや公開ディレクトリに置かない。
+- 計測を有効にする前に、対象地域で必要な Cookie 同意やプライバシー通知を整備する。
+
 ## 現在の構成
 
 - ホーム: ヒーロー → 長文（Offprint、note）と音声（ポッドキャスト）を続けて配置 → 短文（Bluesky） → 制作物（『1999』）。分類上のまとまりに番号などの仮名は表示しない。
