@@ -228,9 +228,11 @@
       h1 { font-size:clamp(3.8rem,19vw,7rem); }
       .hero-note { justify-self:start; max-width:82%; }
       .role-line { margin-top:22px; }
-      .quick-nav { grid-template-columns:repeat(2,1fr); }
-      .quick-nav a:nth-child(odd) { border-left:1px solid var(--rule); }
-      .quick-nav a { border-top:1px solid var(--rule); }
+      .quick-nav { grid-template-columns:repeat(2,minmax(0,1fr)); border-inline:1px solid var(--rule); }
+      .quick-nav a { border-right:0; }
+      .quick-nav a:first-child { border-left:0; }
+      .quick-nav a:nth-child(odd) { border-right:1px solid var(--rule); }
+      .quick-nav a:nth-child(n+3) { border-top:1px solid var(--rule); }
       .section-head { padding-top:34px; }
       .featured-work { grid-template-columns:1fr; min-height:0; }
       .featured-media { min-height:0; aspect-ratio:973/615; }
