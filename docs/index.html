@@ -70,14 +70,6 @@
     .site-header { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--rule); }
     .signature { font-family: var(--mono); font-weight: 500; letter-spacing: -.04em; text-decoration: none; }
     .edition { font: 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-    .hero { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: end; padding: 74px 0 58px; border-bottom: 1px solid var(--rule); }
-    .eyebrow { margin: 0 0 22px; font: 13px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-    h1 { margin: 0; font-family: var(--display); font-size: clamp(4rem,10vw,9.6rem); font-weight: 900; line-height: .86; letter-spacing: -.095em; }
-    h1 span { display: block; }
-    .hero-note { justify-self: end; max-width: 265px; padding: 22px; font-weight: 700; }
-    .hero-note p { margin: 0; }
-    .hero-note small { display: block; margin-top: 18px; font: 12px/1.4 var(--mono); text-transform: uppercase; }
-    .role-line { max-width:34rem; margin:28px 0 0; font-weight:700; }
     .quick-nav { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--rule); }
     .quick-nav a { min-width:0; padding:15px 10px; border-right:1px solid var(--rule); font:12px/1.4 var(--mono); text-align:center; text-decoration:none; }
     .quick-nav a:first-child { border-left:1px solid var(--rule); }
@@ -169,12 +161,8 @@
     html[data-style="midnight"] { --bg:#080b1b; --fg:#f6f4ff; --muted:#9ea5c9; --accent:#ff3ea5; --accent-2:#b9ff39; --accent-3:#51d9ff; --card:#11162e; --rule:rgba(142,229,255,.24); --display:"Space Grotesk","Noto Sans JP",sans-serif; }
     html[data-style="midnight"] body { background: linear-gradient(120deg,rgba(255,62,165,.12),transparent 35%), radial-gradient(circle at 85% 20%,rgba(81,217,255,.18),transparent 30rem), #080b1b; }
     html[data-style="midnight"] body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:10; background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.018) 3px 4px); }
-    html[data-style="midnight"] .site-header, html[data-style="midnight"] .hero { border-color:var(--accent-3); }
+    html[data-style="midnight"] .site-header { border-color:var(--accent-3); }
     html[data-style="midnight"] .edition { color:var(--accent-2); text-shadow:0 0 16px rgba(185,255,57,.65); }
-    html[data-style="midnight"] .hero { min-height:65vh; align-items:center; }
-    html[data-style="midnight"] h1 { letter-spacing:-.07em; text-transform:uppercase; text-shadow:5px 5px 0 rgba(255,62,165,.6),-4px -4px 0 rgba(81,217,255,.35); }
-    html[data-style="midnight"] .title-top { font-size:.4em; color:var(--accent-3); letter-spacing:.02em; }
-    html[data-style="midnight"] .hero-note { color:var(--bg); background:var(--accent-2); border-radius:999px 999px 12px 999px; transform:rotate(-3deg); box-shadow:0 0 40px rgba(185,255,57,.25); }
     html[data-style="midnight"] .featured-work { border:1px solid var(--accent-3); background:linear-gradient(145deg,#161c3b,#0d1125); box-shadow:0 0 45px rgba(81,217,255,.12); }
     html[data-style="midnight"] .featured-tag { color:var(--bg); background:var(--accent-2); }
     html[data-style="midnight"] .featured-work:hover { box-shadow:0 20px 65px rgba(0,0,0,.55),0 0 35px rgba(81,217,255,.2); }
@@ -190,12 +178,8 @@
     /* 02 — Game Boy screen */
     html[data-style="gameboy"] { --bg:#9bbc0f; --fg:#0f380f; --muted:#306230; --accent:#0f380f; --accent-2:#8bac0f; --accent-3:#306230; --card:#8bac0f; --rule:rgba(15,56,15,.62); --sans:"DotGothic16",monospace; --display:"DotGothic16",monospace; --mono:"DM Mono",monospace; --wrap:min(980px,calc(100% - 36px)); }
     html[data-style="gameboy"] body { background:repeating-linear-gradient(0deg,rgba(15,56,15,.07) 0 1px,transparent 1px 4px),var(--bg); image-rendering:pixelated; }
-    html[data-style="gameboy"] .site-header, html[data-style="gameboy"] .hero { border-color:var(--fg); }
+    html[data-style="gameboy"] .site-header { border-color:var(--fg); }
     html[data-style="gameboy"] .edition { color:var(--muted); }
-    html[data-style="gameboy"] h1 { font-size:clamp(3.5rem,9vw,8rem); font-weight:400; letter-spacing:.02em; line-height:1; text-shadow:4px 4px 0 var(--accent-2); }
-    html[data-style="gameboy"] .title-top { font-size:.34em; letter-spacing:.08em; }
-    html[data-style="gameboy"] .hero-note { justify-self:start; max-width:540px; padding:18px; color:var(--bg); background:var(--fg); border:4px solid var(--fg); box-shadow:6px 6px 0 var(--muted); font-weight:400; }
-    html[data-style="gameboy"] .hero-note small { color:var(--accent-2); }
     html[data-style="gameboy"] .quick-nav a:hover { color:var(--bg); background:var(--fg); }
     html[data-style="gameboy"] .featured-work { border:4px solid var(--fg); background:var(--card); box-shadow:8px 8px 0 var(--fg); }
     html[data-style="gameboy"] .featured-work:hover { transform:translate(-3px,-3px); box-shadow:11px 11px 0 var(--fg); }
@@ -224,10 +208,6 @@
       :root { --wrap:min(100% - 24px,680px); }
       .site-header { min-height:66px; }
       .edition { font-size:10px; }
-      .hero { min-height:0; grid-template-columns:1fr; gap:34px; padding:52px 0 46px; }
-      h1 { font-size:clamp(3.8rem,19vw,7rem); }
-      .hero-note { justify-self:start; max-width:82%; }
-      .role-line { margin-top:22px; }
       .quick-nav { grid-template-columns:repeat(2,minmax(0,1fr)); border-inline:1px solid var(--rule); }
       .quick-nav a { border-right:0; }
       .quick-nav a:first-child { border-left:0; }
@@ -249,7 +229,6 @@
       .current-game strong { font-size:14px; }
       footer { grid-template-columns:1fr; }
       footer .mark { justify-self:end; }
-      html[data-style] .hero { min-height:0; padding-top:40px; padding-bottom:38px; }
     }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
   </style>
@@ -261,9 +240,6 @@
     <span class="edition" id="edition-name">random edition</span>
   </header>
   <main id="main-content" tabindex="-1">
-    <section class="hero wrap" aria-labelledby="page-title">
-      <div><h1 id="page-title"><span class="title-top">砂の</span><span class="title-main">砂場</span></h1></div>
-    </section>
     <nav class="quick-nav wrap" aria-label="活動へのショートカット"><a href="#longform">長文</a><a href="#audio">音声</a><a href="#short-posts">短文</a><a href="#works">制作物</a></nav>
     <section class="wrap" aria-label="活動">
       <div class="links">
